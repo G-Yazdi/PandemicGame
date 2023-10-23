@@ -29,4 +29,16 @@ public class CityTest
 	   assertEquals(previousSize + 1, city.getNeighbours().size());
        
    }
+   
+   @Test
+   public void addInfectionCubeTest()
+   {
+	   int previousSize = city.getInfectionCubes().size();
+	   
+	   InfectionCube newInfectionCube = new InfectionCube("Flue");
+	   city.addInfectionCube(newInfectionCube);
+	   
+	   assertEquals(previousSize + 1, city.getInfectionCubes().size());
+       
+   }
 }
