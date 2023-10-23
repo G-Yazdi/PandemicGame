@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class City 
 {
 	private ArrayList<City> neighbours = new ArrayList<City>();
+	private ArrayList<InfectionCube> infectionCubes = new ArrayList<InfectionCube>();
 	private String name;
 	
 	public City(String name) {
@@ -29,6 +30,14 @@ public class City
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public ArrayList<InfectionCube> getInfectionCubes() {
+		return infectionCubes;
+	}
+
+	public void addInfectionCube(InfectionCube infectionCube) {
+		this.infectionCubes.add(infectionCube);
 	}
 	
     
