@@ -8,11 +8,11 @@ import java.util.ArrayList;
  */
 public class City 
 {
-	ArrayList<City> neighbours = new ArrayList<City>();
-	String name;
+	private ArrayList<City> neighbours = new ArrayList<City>();
+	private String name;
 	
 	public City(String name) {
-		this.name = name;
+		this.setName(name);
 	}
 	
 	public ArrayList<City> getNeighbours() {
@@ -21,6 +21,14 @@ public class City
 	
 	public void addNeighbour(City city) {
 		this.neighbours.add(city);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
     
