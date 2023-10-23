@@ -11,11 +11,22 @@ import org.junit.jupiter.api.BeforeEach;
  */
 public class CityTest
 {
-	@BeforeEach
+	City city;
+
+    @BeforeEach                                         
+    void setUp() {
+        city = new City("mashhad");
+    }
 
    @Test
    public void addNeighbourTest()
    {
-       assertTrue( true );
+	   int previousSize = city.getNeighbours().size();
+	   
+	   City newCity = new City("zahedan");
+	   city.addNeighbour(newCity);
+	   
+	   assertEquals(previousSize + 1, city.getNeighbours().size());
+       
    }
 }
