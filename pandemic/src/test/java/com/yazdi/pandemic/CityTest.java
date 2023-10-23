@@ -9,5 +9,9 @@ import org.junit.jupiter.api.Test;
  */
 public class CityTest 
 {
-   
+   @Test
+   public void addNeighbourTest()
+   {
+       assertTrue( true );
+   }
 }
