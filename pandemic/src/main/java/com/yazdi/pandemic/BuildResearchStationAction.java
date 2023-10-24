@@ -1,11 +1,16 @@
 package com.yazdi.pandemic;
 
 public class BuildResearchStationAction implements Action {
+	
+	private City city;
+	
+	public BuildResearchStationAction(City city) {
+		this.city = city;
+	}
 
 	@Override
 	public void act() {
-		// TODO Auto-generated method stub
-
+		this.city.setHasResearchStation(true);
 	}
 
 }

@@ -34,7 +34,7 @@ public class ActionTest {
 		action = new BuildResearchStationAction(city);
 		action.act();
 		   
-		assertTrue(city.hasResearchStation());
+		assertTrue(city.getHasResearchStation());
 	}
 	
 	
