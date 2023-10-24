@@ -10,24 +10,23 @@ public class ActionTest {
 	
 	City destination;
 	Player player;
-	ArrayList<Action> actions;
+	Action action;
 
     @BeforeEach                                         
     void setUp() {
     	destination = new City("mashhad");
-        player = new player();
-        actions = new ArrayList<Action>();
-        actions.add(new moveAction ());
+        player = new Player();
+        
     }
 	
 	@Test
 	public void moveActionTest(){
 		
-		player.setPossibleActions(actions);
-		player.actions[0].act(destination);
+		action = new MoveAction(player, destination);
+		action.act();
 		   
-		assertEquals(destination.getName(), player.getCurrentLocation());
-		}
+		assertTrue(player.getCurrentLocation() == destination);
+	}
 	
 	
 
