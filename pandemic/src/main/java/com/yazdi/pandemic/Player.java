@@ -12,4 +12,9 @@ public class Player {
 		this.currentLocation = currentLocation;
 	}
 	
+	public void act(Action action) {
+		action.act();
+	}
+	
+	
 }
