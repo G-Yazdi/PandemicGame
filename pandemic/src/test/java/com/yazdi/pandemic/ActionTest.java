@@ -23,7 +23,9 @@ public class ActionTest {
 	public void moveActionTest(){
 		
 		action = new MoveAction(player, city);
-		action.act();
+		//action.act();
+		
+		this.player.act(action);
 		   
 		assertTrue(player.getCurrentLocation() == city);
 	}
@@ -32,7 +34,8 @@ public class ActionTest {
 	public void buildResearchStationActionTest(){
 		
 		action = new BuildResearchStationAction(city);
-		action.act();
+		this.player.act(action);
+		//action.act();
 		   
 		assertTrue(city.getHasResearchStation());
 	}
