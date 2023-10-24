@@ -8,13 +8,13 @@ import org.junit.jupiter.api.BeforeEach;
 
 public class ActionTest {
 	
-	City destination;
+	City city;
 	Player player;
 	Action action;
 
     @BeforeEach                                         
     void setUp() {
-    	destination = new City("mashhad");
+    	city = new City("mashhad");
         player = new Player();
         
     }
@@ -22,10 +22,19 @@ public class ActionTest {
 	@Test
 	public void moveActionTest(){
 		
-		action = new MoveAction(player, destination);
+		action = new MoveAction(player, city);
 		action.act();
 		   
-		assertTrue(player.getCurrentLocation() == destination);
+		assertTrue(player.getCurrentLocation() == city);
+	}
+	
+	@Test
+	public void buildResearchStationActionTest(){
+		
+		action = new BuildResearchStationAction(city);
+		action.act();
+		   
+		assertTrue(city.hasResearchStation());
 	}
 	
 	
