@@ -5,6 +5,10 @@ import java.util.ArrayList;
 public class Game {
 	
 	private ArrayList<City> cities;
+	
+	public Game() {
+		this.cities = new ArrayList<City>();
+	}
 
 	public ArrayList<City> getCities() {
 		return cities;
