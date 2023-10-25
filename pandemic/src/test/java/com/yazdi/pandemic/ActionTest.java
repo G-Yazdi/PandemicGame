@@ -17,7 +17,7 @@ public class ActionTest {
     void setUp() {
     	city = new City("mashhad");
         player = new Player();
-        disease = new Disease("Influenza");
+        disease = new Disease("Influenza", false);
         
         
     }
@@ -43,10 +43,10 @@ public class ActionTest {
 	@Test
 	public void findCureActionTest(){
 		
-		action = new FindCureAction(this.disease);
+		action = new FindCureAction(disease);
 		this.player.act(action);
 		   
-		assertTrue(disease.getHasRemedy());
+		assertTrue(disease.getHasCure());
 	}
 	
 	

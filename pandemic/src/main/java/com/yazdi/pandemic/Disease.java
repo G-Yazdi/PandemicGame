@@ -16,7 +16,7 @@ public class Disease {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public boolean isHasCure() {
+	public boolean getHasCure() {
 		return hasCure;
 	}
 	public void setHasCure(boolean hasCure) {

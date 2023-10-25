@@ -12,10 +12,12 @@ import org.junit.jupiter.api.BeforeEach;
 public class CityTest
 {
 	City city;
+	Disease disease;
 
     @BeforeEach                                         
     void setUp() {
         city = new City("mashhad");
+        disease = new Disease("Influenza", false);
     }
 
    @Test
@@ -35,7 +37,7 @@ public class CityTest
    {
 	   int previousSize = city.getInfectionCubes().size();
 	   
-	   InfectionCube newInfectionCube = new InfectionCube("Flue");
+	   InfectionCube newInfectionCube = new InfectionCube(disease);
 	   city.addInfectionCube(newInfectionCube);
 	   
 	   assertEquals(previousSize + 1, city.getInfectionCubes().size());
