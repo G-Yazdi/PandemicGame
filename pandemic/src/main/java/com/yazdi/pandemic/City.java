@@ -11,7 +11,7 @@ public class City
 	private ArrayList<City> neighbours;
 	private ArrayList<InfectionCube> infectionCubes;
 	private String name;
-	private Boolean hasResearchStation;
+	private boolean hasResearchStation;
 	
 	public City(String name) {
 		

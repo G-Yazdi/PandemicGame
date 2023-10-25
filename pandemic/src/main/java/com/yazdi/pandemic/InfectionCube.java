@@ -2,14 +2,18 @@ package com.yazdi.pandemic;
 
 public class InfectionCube {
 	
-	private String diseaseName;
+	private Disease disease;
 	
-	public InfectionCube(String diseaseName) {
-		this.diseaseName = diseaseName;
+	public InfectionCube(Disease disease) {
+		this.setDisease(disease);
 	}
 
-	public String getDiseaseName() {
-		return diseaseName;
+	public Disease getDisease() {
+		return disease;
+	}
+
+	public void setDisease(Disease disease) {
+		this.disease = disease;
 	}
 
 }
