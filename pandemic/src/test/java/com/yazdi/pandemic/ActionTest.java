@@ -52,7 +52,7 @@ public class ActionTest {
 	@Test
 	public void findCureActionTest(){
 		
-		action = new FindCureAction(disease);
+		action = new FindCureAction(ActionTest.disease, ActionTest.game.getCities());
 		ActionTest.player.act(action);
 		
 		List<City> cities = ActionTest.game.getCities();
