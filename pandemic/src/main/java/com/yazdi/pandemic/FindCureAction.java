@@ -11,6 +11,7 @@ public class FindCureAction implements Action {
 	@Override
 	public void act() {
 		disease.setHasCure(true);
+		//notifyAllCities()
 	}
 
 }
