@@ -2,12 +2,11 @@ package com.yazdi.pandemic;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class ActionTest {
 	
@@ -77,7 +76,7 @@ public class ActionTest {
 	@Test
 	public void buildResearchStationActionTest(){
 		
-		action = new BuildResearchStationAction(city1);
+		action = new BuildResearchStationAction(player, city1);
 		ActionTest.player.act(action);
 		   
 		assertTrue(city1.getHasResearchStation());
