@@ -23,11 +23,7 @@ public class TreatDiseaseAction implements Action {
 			Disease d = diseaseIterator.next();
 			if(d.getName() == this.disease.getName() 
 					&& d.getHasCure()) {
-				
-				city.getInfectionCubes().stream().filter(
-						cube->cube.getDisease().getName() == this.disease.getName())
-		        		.findFirst()
-		        		.ifPresent(city.getInfectionCubes()::remove);
+				city.removeInfectionCube(this.disease.getName());
 				break;
 			}	
 		}
