@@ -11,26 +11,46 @@ import org.junit.jupiter.api.BeforeAll;
 
 public class ActionTest {
 	
-	static City city1, city2;
+	static City city1, city2, city3;
 	static Player player;
 	static Game game;
 	Action action;
 	static Disease disease;
 	
+	
 
 	@BeforeAll
 	public static void init(){
-		city1 = new City("mashhad");
-		city2 = new City("zahedan");
+		city1 = new City("Mashhad");
+		city2 = new City("Zahedan");
+		/*
+		 * 
+		 City1 and city2 are neighbors*/
+		 
+		city1.addNeighbour(city2);
+		city2.addNeighbour(city1);
+		
+		city3 = new City("Tehran");
         player = new Player();
+        
+        player.setCurrentLocation(city1);
+        
         disease = new Disease("Influenza", false);
         city1.addInfectionCube(new InfectionCube(disease));
         city2.addInfectionCube(new InfectionCube(disease));
         game = new Game();
         game.addCity(city1);
         game.addCity(city2);
+        game.addCity(city3);
         game.addDisease(disease);
 	}                                        
+	
+	@Test
+	void illegalMoveExceptionTest() {
+	    Throwable exception = assertThrows(RuntimeException.class, 
+	    		() -> new MoveAction(player, city3));
+	    assertEquals("Illegal move!", exception.getMessage());
+	}
 	
 	@Test
 	public void moveActionTest(){
