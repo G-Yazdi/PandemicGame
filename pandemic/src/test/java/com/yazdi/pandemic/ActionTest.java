@@ -49,7 +49,7 @@ public class ActionTest {
 	void illegalMoveRequestExceptionTest() {
 	    Throwable exception = assertThrows(RuntimeException.class, 
 	    		() -> new MoveAction(player, city3));
-	    assertEquals("Illegal move!", exception.getMessage());
+	    assertEquals("Illegal move request!", exception.getMessage());
 	}
 	
 	@Test
