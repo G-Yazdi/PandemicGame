@@ -70,9 +70,7 @@ public class ActionTest {
 	@Test
 	public void treatDiseaseActionTest(){
 		
-		List<InfectionCube> cubesOfDisease = 
-				city1.getInfectionCubes().stream().filter(
-				i->i.getDisease().getName() == ActionTest.disease.getName()).toList();
+		List<InfectionCube> cubesOfDisease = city1.getInfectionCubes(disease.getName());
 		int previousSize = cubesOfDisease.size();
 		
 		action = new TreatDiseaseAction(disease, city1, ActionTest.game.getDiseases());
