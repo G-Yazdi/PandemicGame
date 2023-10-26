@@ -76,10 +76,20 @@ public class ActionTest {
 	@Test
 	public void buildResearchStationActionTest(){
 		
+		int previousSize = game.getDiscardedPlayerCards().size();
+		int previousCount = player.getHand().size();
+		
 		action = new BuildResearchStationAction(player, city1);
 		ActionTest.player.act(action);
-		   
-		assertTrue(city1.getHasResearchStation());
+		
+		int currentSize = game.getDiscardedPlayerCards().size();
+		int currentCount = player.getHand().size();
+		
+		assertAll(
+	            () -> assertTrue(city1.getHasResearchStation()),
+	            () -> assertEquals(previousSize - 1, currentSize),// check if card is discarded
+	            () -> assertEquals(previousCount - 1, currentCount)//check if card is removed from the player's hand
+	    );
 	}
 	
 	@Test
