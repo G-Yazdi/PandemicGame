@@ -13,6 +13,7 @@ public class ActionTest {
 	
 	static City city1, city2, city3;
 	static Player player;
+	static Card playerCard;
 	static Game game;
 	Action action;
 	static Disease disease;
@@ -31,13 +32,18 @@ public class ActionTest {
 		city2.addNeighbour(city1);
 		
 		city3 = new City("Tehran");
+		
+		disease = new Disease("Influenza", false);
+	    city1.addInfectionCube(new InfectionCube(disease));
+	    city2.addInfectionCube(new InfectionCube(disease));
+	    
         player = new Player();
-        
         player.setCurrentLocation(city1);
         
-        disease = new Disease("Influenza", false);
-        city1.addInfectionCube(new InfectionCube(disease));
-        city2.addInfectionCube(new InfectionCube(disease));
+        playerCard = new PlayerCard(city1.getName(), disease.getName());
+        player.addCardToHand(playerCard);
+        
+       
         game = new Game();
         game.addCity(city1);
         game.addCity(city2);
@@ -59,6 +65,13 @@ public class ActionTest {
 		ActionTest.player.act(action);
 		   
 		assertTrue(player.getCurrentLocation() == city1);
+	}
+	
+	@Test
+	void illegalBuildResearchStationRequestExceptionTest() {
+	    Throwable exception = assertThrows(RuntimeException.class, 
+	    		() -> new BuildResearchStationAction(player, city3));
+	    assertEquals("Illegal build request!", exception.getMessage());
 	}
 	
 	@Test
