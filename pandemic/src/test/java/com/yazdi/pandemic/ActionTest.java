@@ -78,8 +78,7 @@ public class ActionTest {
 		action = new TreatDiseaseAction(disease, city1, ActionTest.game.getDiseases());
 		ActionTest.player.act(action);
 		
-		cubesOfDisease = city1.getInfectionCubes().stream().filter(
-				i->i.getDisease().getName() == ActionTest.disease.getName()).toList();
+		cubesOfDisease = city1.getInfectionCubes(disease.getName());
 		int currentSize = cubesOfDisease.size();
 		
 		assertEquals(previousSize - 1, currentSize);

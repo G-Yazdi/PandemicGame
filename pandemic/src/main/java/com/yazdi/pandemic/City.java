@@ -1,6 +1,7 @@
 package com.yazdi.pandemic;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -49,6 +50,10 @@ public class City
 				cube->cube.getDisease().getName() == diseaseName)
 		.findFirst()
 		.ifPresent(this.infectionCubes::remove);
+	}
+	public List<InfectionCube> getInfectionCubes(String diseaseName){
+		return this.getInfectionCubes().stream().filter(
+				i->i.getDisease().getName() == diseaseName).toList();
 	}
 
 	public Boolean getHasResearchStation() {
