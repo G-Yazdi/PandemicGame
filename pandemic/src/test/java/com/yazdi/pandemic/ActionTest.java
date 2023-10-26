@@ -41,7 +41,7 @@ public class ActionTest {
         player.setCurrentLocation(city1);
         
         playerCard = new PlayerCard(city1.getName(), disease.getName());
-        player.addCardToHand(playerCard);
+        player.addToHand(playerCard);
         
        
         game = new Game();

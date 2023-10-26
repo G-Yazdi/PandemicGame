@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class Player {
 	
 	private City currentLocation;
-	private ArrayList<PlayerCard> hand;
+	private ArrayList<Card> hand;
 	
 	public Player() {
-		this.hand = new ArrayList<PlayerCard>();
+		this.hand = new ArrayList<Card>();
 	}
 
 	public City getCurrentLocation() {
@@ -23,15 +23,15 @@ public class Player {
 		action.act();
 	}
 
-	public ArrayList<PlayerCard> getHand() {
+	public ArrayList<Card> getHand() {
 		return hand;
 	}
 
-	public void setHand(ArrayList<PlayerCard> playerCards) {
+	public void setHand(ArrayList<Card> playerCards) {
 		this.hand = playerCards;
 	}
 	
-	public void addToHand(PlayerCard playerCard) {
+	public void addToHand(Card playerCard) {
 		this.hand.add(playerCard);
 	}
 	
