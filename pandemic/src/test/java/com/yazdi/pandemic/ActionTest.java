@@ -29,6 +29,7 @@ public class ActionTest {
         game = new Game();
         game.addCity(city1);
         game.addCity(city2);
+        game.addDisease(disease);
 	}                                        
 	
 	@Test
@@ -59,8 +60,9 @@ public class ActionTest {
 		Iterator<Disease> diseaseIterator = diseases.iterator();
 		
 		while(diseaseIterator.hasNext()) {
-				if(diseaseIterator.next().getName() == ActionTest.disease.getName()) {
-					assertTrue(diseaseIterator.next().getHasCure());
+			Disease d = diseaseIterator.next();
+				if(d.getName() == ActionTest.disease.getName()) {
+					assertTrue(d.getHasCure());
 				}		
 		}
 	}
@@ -68,21 +70,18 @@ public class ActionTest {
 	@Test
 	public void treatDiseaseActionTest(){
 		
-		List<InfectionCube> cubesOfCuredDisease = 
+		List<InfectionCube> cubesOfDisease = 
 				city1.getInfectionCubes().stream().filter(
-				i->i.getDisease().getName() == ActionTest.disease.getName() 
-				&& i.getDisease().getHasCure() == true).toList();
-		int previousSize = cubesOfCuredDisease.size();
+				i->i.getDisease().getName() == ActionTest.disease.getName()).toList();
+		int previousSize = cubesOfDisease.size();
 		
-		action = new TreatDiseaseAction(disease, city1);
+		action = new TreatDiseaseAction(disease, city1, ActionTest.game.getDiseases());
 		ActionTest.player.act(action);
 		
-		cubesOfCuredDisease = city1.getInfectionCubes().stream().filter(
-				i->i.getDisease().getName() == ActionTest.disease.getName() 
-				&& i.getDisease().getHasCure() == true).toList();
-		int currentSize = cubesOfCuredDisease.size();
+		cubesOfDisease = city1.getInfectionCubes().stream().filter(
+				i->i.getDisease().getName() == ActionTest.disease.getName()).toList();
+		int currentSize = cubesOfDisease.size();
 		
-		   
 		assertEquals(previousSize - 1, currentSize);
 	}
 	

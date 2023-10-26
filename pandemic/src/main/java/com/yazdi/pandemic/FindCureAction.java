@@ -16,11 +16,11 @@ public class FindCureAction implements Action {
 
 	@Override
 	public void act() {
-		
 		Iterator<Disease> diseaseIterator = diseases.iterator();
 		while(diseaseIterator.hasNext()) {
-			if(diseaseIterator.next().getName() == this.disease.getName()) {
-				diseaseIterator.next().setHasCure(true);
+			Disease d = diseaseIterator.next();
+			if(d.getName() == this.disease.getName()) {
+				d.setHasCure(true);
 				break;
 			}	
 		}
