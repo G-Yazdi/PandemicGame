@@ -7,23 +7,22 @@ import java.util.Iterator;
 public class FindCureAction implements Action {
 	
 	private Disease disease;
-	private ArrayList<City> cities;
+	private ArrayList<Disease> diseases;
 	
-	public FindCureAction(Disease disease, ArrayList<City> cities) {
+	public FindCureAction(Disease disease, ArrayList<Disease> diseases) {
 		this.disease = disease;
-		this.cities = cities;
+		this.diseases = diseases;
 	}
 
 	@Override
 	public void act() {
-		Iterator<City> cityIterator = cities.iterator();
 		
-		while(cityIterator.hasNext()) {
-			((City) cityIterator.next()).getInfectionCubes()
-			.forEach((InfectionCube cube)->{
-				if(cube.getDisease().getName() == this.disease.getName())
-					cube.getDisease().setHasCure(true);
-					});
+		Iterator<Disease> diseaseIterator = diseases.iterator();
+		while(diseaseIterator.hasNext()) {
+			if(diseaseIterator.next().getName() == this.disease.getName()) {
+				diseaseIterator.next().setHasCure(true);
+				break;
+			}	
 		}
 	}
 

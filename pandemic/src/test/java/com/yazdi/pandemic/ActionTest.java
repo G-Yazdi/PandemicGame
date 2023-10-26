@@ -52,20 +52,17 @@ public class ActionTest {
 	@Test
 	public void findCureActionTest(){
 		
-		action = new FindCureAction(ActionTest.disease, ActionTest.game.getCities());
+		action = new FindCureAction(ActionTest.disease, ActionTest.game.getDiseases());
 		ActionTest.player.act(action);
 		
-		List<City> cities = ActionTest.game.getCities();
-		Iterator<City> cityIterator = cities.iterator();
+		List<Disease> diseases = ActionTest.game.getDiseases();
+		Iterator<Disease> diseaseIterator = diseases.iterator();
 		
-		while(cityIterator.hasNext()) {
-			((City) cityIterator.next()).getInfectionCubes()
-			.forEach((InfectionCube cube)->{
-				if(cube.getDisease().getName() == ActionTest.disease.getName())
-					assertFalse(!cube.getDisease().getHasCure());
-					});
+		while(diseaseIterator.hasNext()) {
+				if(diseaseIterator.next().getName() == ActionTest.disease.getName()) {
+					assertTrue(diseaseIterator.next().getHasCure());
+				}		
 		}
-		assertTrue(true);
 	}
 	
 	@Test
