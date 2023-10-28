@@ -87,8 +87,8 @@ public class ActionTest {
 		
 		assertAll(
 	            () -> assertTrue(city1.getHasResearchStation()),
-	            () -> assertEquals(previousSize + 1, currentSize), // check if card is discarded
-	            () -> assertEquals(previousCount - 1, currentCount) //check if card is removed from the player's hand
+	            () -> assertEquals(previousSize + 1, currentSize), // check if the card is discarded
+	            () -> assertEquals(previousCount - 1, currentCount) //check if the card is removed from the player's hand
 	    );
 	}
 	
