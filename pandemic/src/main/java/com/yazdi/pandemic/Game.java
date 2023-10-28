@@ -6,6 +6,7 @@ public class Game {
 	
 	private ArrayList<City> cities;
 	private ArrayList<Disease> diseases;
+	private ArrayList<Card> discardedPlayerCards;
 	
 	public Game() {
 		this.cities = new ArrayList<City>();
@@ -34,5 +35,15 @@ public class Game {
 	public void addDisease(Disease disease) {
 		this.diseases.add(disease);
 	}
+
+	public ArrayList<Card> getDiscardedPlayerCards() {
+		return discardedPlayerCards;
+	}
+
+	public void setDiscardedPlayerCards(ArrayList<Card> discardedPlayerCards) {
+		this.discardedPlayerCards = discardedPlayerCards;
+	}
+	
+	
 
 }
