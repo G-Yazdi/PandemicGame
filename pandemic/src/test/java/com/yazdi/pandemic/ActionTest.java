@@ -104,7 +104,7 @@ public class ActionTest {
 			assertTrue(disease.getHasCure());
 		}
 		else
-			assertFalse(true);
+			assertTrue(false);
 	}
 	
 	@Test

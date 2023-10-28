@@ -48,10 +48,7 @@ public class City
 		this.infectionCubes.add(infectionCube);
 	}
 	public void removeInfectionCube(String diseaseName) {
-		this.infectionCubes.stream().filter(
-				cube->cube.getDisease().getName() == diseaseName)
-		.findFirst()
-		.ifPresent(this.infectionCubes::remove);
+		this.infectionCubes.removeIfCustom(cube->cube.getDisease().getName() == diseaseName);
 	}
 	public List<InfectionCube> getInfectionCubes(String diseaseName){
 		return this.getInfectionCubes().stream().filter(
