@@ -1,15 +1,14 @@
 package com.yazdi.pandemic;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import com.yazdi.pandemic.utils.CustomArrayList;
 
 public class TreatDiseaseAction implements Action {
 	
 	private Disease disease;
 	private City city;
-	private ArrayList<Disease> diseases;
+	private CustomArrayList<Disease> diseases;
 	
-	public TreatDiseaseAction(Disease disease, City city, ArrayList<Disease> diseases) {
+	public TreatDiseaseAction(Disease disease, City city, CustomArrayList<Disease> diseases) {
 		this.disease = disease;
 		this.city = city;
 		this.diseases = diseases;
@@ -18,18 +17,10 @@ public class TreatDiseaseAction implements Action {
 	@Override
 	public void act() {
 		
-		Iterator<Disease> diseaseIterator = diseases.iterator();
-		while(diseaseIterator.hasNext()) {
-			Disease d = diseaseIterator.next();
-			if(d.getName() == this.disease.getName() 
-					&& d.getHasCure()) {
-				city.removeInfectionCube(this.disease.getName());
-				break;
-			}	
+		if(this.diseases.findIfCustom(d->d.getName() == this.disease.getName() 
+					&& d.getHasCure()) != null) {
+			city.removeInfectionCube(this.disease.getName());
 		}
-		
-		
-
 	}
 
 }
