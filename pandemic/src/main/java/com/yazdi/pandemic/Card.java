@@ -1,9 +1,9 @@
 package com.yazdi.pandemic;
 
-import java.util.ArrayList;
+import com.yazdi.pandemic.utils.CustomArrayList;
 
 public interface Card {
 	
-	public void discard(ArrayList<Card> discarded);
+	public void discard(CustomArrayList<Card> discarded);
 
 }

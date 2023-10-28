@@ -1,7 +1,9 @@
 package com.yazdi.pandemic;
 
-import java.util.ArrayList;
+
 import java.util.List;
+
+import com.yazdi.pandemic.utils.CustomArrayList;
 
 /**
  *
@@ -9,8 +11,8 @@ import java.util.List;
  */
 public class City 
 {
-	private ArrayList<City> neighbours;
-	private ArrayList<InfectionCube> infectionCubes;
+	private CustomArrayList<City> neighbours;
+	private CustomArrayList<InfectionCube> infectionCubes;
 	private String name;
 	private boolean hasResearchStation;
 	
@@ -18,11 +20,11 @@ public class City
 		
 		this.setName(name);
 		this.setHasResearchStation(false);
-		this.neighbours = new ArrayList<City>();
-		this.infectionCubes = new ArrayList<InfectionCube>();
+		this.neighbours = new CustomArrayList<City>();
+		this.infectionCubes = new CustomArrayList<InfectionCube>();
 	}
 	
-	public ArrayList<City> getNeighbours() {
+	public CustomArrayList<City> getNeighbours() {
 		return this.neighbours;
 	}
 	
@@ -38,7 +40,7 @@ public class City
 		this.name = name;
 	}
 
-	public ArrayList<InfectionCube> getInfectionCubes() {
+	public CustomArrayList<InfectionCube> getInfectionCubes() {
 		return infectionCubes;
 	}
 

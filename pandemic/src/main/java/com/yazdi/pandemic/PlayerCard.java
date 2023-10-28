@@ -1,6 +1,6 @@
 package com.yazdi.pandemic;
 
-import java.util.ArrayList;
+import com.yazdi.pandemic.utils.CustomArrayList;
 
 public class PlayerCard implements Card{
 	
@@ -25,7 +25,7 @@ public class PlayerCard implements Card{
 		this.cityName = cityName;
 	}
 	@Override
-	public void discard(ArrayList<Card> discardedPlayerCards) {
+	public void discard(CustomArrayList<Card> discardedPlayerCards) {
 		discardedPlayerCards.add(this);
 		
 	}

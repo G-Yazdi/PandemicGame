@@ -3,9 +3,10 @@ package com.yazdi.pandemic;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
 import org.junit.jupiter.api.BeforeAll;
 
-import java.util.Iterator;
+
 import java.util.List;
 
 public class ActionTest {
@@ -98,15 +99,12 @@ public class ActionTest {
 		action = new FindCureAction(ActionTest.disease, ActionTest.game.getDiseases());
 		ActionTest.player.act(action);
 		
-		List<Disease> diseases = ActionTest.game.getDiseases();
-		Iterator<Disease> diseaseIterator = diseases.iterator();
-		
-		while(diseaseIterator.hasNext()) {
-			Disease d = diseaseIterator.next();
-				if(d.getName() == ActionTest.disease.getName()) {
-					assertTrue(d.getHasCure());
-				}		
+		Disease disease = game.getDiseases().findIfCustom(d->((Disease) d).getName() == ActionTest.disease.getName());
+		if(disease != null) {
+			assertTrue(disease.getHasCure());
 		}
+		else
+			assertFalse(true);
 	}
 	
 	@Test

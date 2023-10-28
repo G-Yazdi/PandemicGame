@@ -1,18 +1,16 @@
 package com.yazdi.pandemic;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
+
+import com.yazdi.pandemic.utils.CustomArrayList;
 
 public class Player {
 	
 	private City currentLocation;
-	private ArrayList<Card> hand;
+	private CustomArrayList<Card> hand;
 	
 	public Player() {
-		this.hand = new ArrayList<Card>();
+		this.hand = new CustomArrayList<Card>();
 	}
 
 	public City getCurrentLocation() {
@@ -27,11 +25,11 @@ public class Player {
 		action.act();
 	}
 
-	public ArrayList<Card> getHand() {
+	public CustomArrayList<Card> getHand() {
 		return hand;
 	}
 
-	public void setHand(ArrayList<Card> playerCards) {
+	public void setHand(CustomArrayList<Card> playerCards) {
 		this.hand = playerCards;
 	}
 	

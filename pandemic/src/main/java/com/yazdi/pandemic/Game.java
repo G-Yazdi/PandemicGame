@@ -1,24 +1,24 @@
 package com.yazdi.pandemic;
 
-import java.util.ArrayList;
+import com.yazdi.pandemic.utils.CustomArrayList;
 
 public class Game {
 	
-	private ArrayList<City> cities;
-	private ArrayList<Disease> diseases;
-	private ArrayList<Card> discardedPlayerCards;
+	private CustomArrayList<City> cities;
+	private CustomArrayList<Disease> diseases;
+	private CustomArrayList<Card> discardedPlayerCards;
 	
 	public Game() {
-		this.cities = new ArrayList<City>();
-		this.diseases = new ArrayList<Disease>();
-		this.discardedPlayerCards = new ArrayList<Card>();
+		this.cities = new CustomArrayList<City>();
+		this.diseases = new CustomArrayList<Disease>();
+		this.discardedPlayerCards = new CustomArrayList<Card>();
 	}
 
-	public ArrayList<City> getCities() {
+	public CustomArrayList<City> getCities() {
 		return cities;
 	}
 
-	public void setCities(ArrayList<City> cities) {
+	public void setCities(CustomArrayList<City> cities) {
 		this.cities = cities;
 	}
 	
@@ -26,22 +26,22 @@ public class Game {
 		this.cities.add(city);
 	}
 
-	public ArrayList<Disease> getDiseases() {
+	public CustomArrayList<Disease> getDiseases() {
 		return diseases;
 	}
 
-	public void setDiseases(ArrayList<Disease> diseases) {
+	public void setDiseases(CustomArrayList<Disease> diseases) {
 		this.diseases = diseases;
 	}
 	public void addDisease(Disease disease) {
 		this.diseases.add(disease);
 	}
 
-	public ArrayList<Card> getDiscardedPlayerCards() {
+	public CustomArrayList<Card> getDiscardedPlayerCards() {
 		return discardedPlayerCards;
 	}
 
-	public void setDiscardedPlayerCards(ArrayList<Card> discardedPlayerCards) {
+	public void setDiscardedPlayerCards(CustomArrayList<Card> discardedPlayerCards) {
 		this.discardedPlayerCards = discardedPlayerCards;
 	}
 	public void addToDiscardedPlayerCards(Card playerCard) {
