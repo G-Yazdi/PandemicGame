@@ -1,6 +1,5 @@
 package com.yazdi.pandemic;
 
-import java.util.Iterator;
 
 import com.yazdi.pandemic.utils.CustomArrayList;
 
@@ -40,16 +39,8 @@ public class Player {
 		this.hand.remove(playerCard);
 	}
 	public Card removeFromHandByCity(String cityName) {
-		Iterator<Card> cardIterator = this.hand.iterator();
-		Card removedCard = null;
-		while(cardIterator.hasNext()) {
-				Card tempCard = cardIterator.next();
-				if(((PlayerCard) tempCard).getCityName() == cityName) {
-					removeFromHand(tempCard);
-					removedCard = tempCard;
-					break;
-				}		
-		}
+		
+		Card removedCard = this.hand.removeIfCustom(card->((PlayerCard) card).getCityName() == cityName);
 		return removedCard;
 	
 	}
