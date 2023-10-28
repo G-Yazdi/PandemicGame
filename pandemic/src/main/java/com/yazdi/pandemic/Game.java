@@ -11,6 +11,7 @@ public class Game {
 	public Game() {
 		this.cities = new ArrayList<City>();
 		this.diseases = new ArrayList<Disease>();
+		this.discardedPlayerCards = new ArrayList<Card>();
 	}
 
 	public ArrayList<City> getCities() {
@@ -43,6 +44,10 @@ public class Game {
 	public void setDiscardedPlayerCards(ArrayList<Card> discardedPlayerCards) {
 		this.discardedPlayerCards = discardedPlayerCards;
 	}
+	public void addToDiscardedPlayerCards(Card playerCard) {
+		this.discardedPlayerCards.add(playerCard);
+	}
+
 	
 	
 

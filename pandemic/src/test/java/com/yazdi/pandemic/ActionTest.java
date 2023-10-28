@@ -69,7 +69,7 @@ public class ActionTest {
 	@Test
 	void illegalBuildResearchStationRequestExceptionTest() {
 	    Throwable exception = assertThrows(RuntimeException.class, 
-	    		() -> new BuildResearchStationAction(player, city3));
+	    		() -> new BuildResearchStationAction(player.getHand(), city3, game.getDiscardedPlayerCards()));
 	    assertEquals("Illegal build request!", exception.getMessage());
 	}
 	
@@ -79,7 +79,7 @@ public class ActionTest {
 		int previousSize = game.getDiscardedPlayerCards().size();
 		int previousCount = player.getHand().size();
 		
-		action = new BuildResearchStationAction(player, city1);
+		action = new BuildResearchStationAction(player.getHand(), city1, game.getDiscardedPlayerCards());
 		ActionTest.player.act(action);
 		
 		int currentSize = game.getDiscardedPlayerCards().size();

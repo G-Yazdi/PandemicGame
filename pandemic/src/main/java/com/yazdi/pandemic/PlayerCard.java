@@ -1,5 +1,7 @@
 package com.yazdi.pandemic;
 
+import java.util.ArrayList;
+
 public class PlayerCard implements Card{
 	
 	private String cityName;
@@ -7,7 +9,7 @@ public class PlayerCard implements Card{
 	
 	
 	public PlayerCard(String cityName, String diseaseName) {
-		this.setCity(cityName);
+		this.setCityName(cityName);
 		this.setDisease(diseaseName);
 	}
 	public String getDisease() {
@@ -16,15 +18,15 @@ public class PlayerCard implements Card{
 	public void setDisease(String diseaseName) {
 		this.diseaseName = diseaseName;
 	}
-	public String getCity() {
+	public String getCityName() {
 		return cityName;
 	}
-	public void setCity(String cityName) {
+	public void setCityName(String cityName) {
 		this.cityName = cityName;
 	}
 	@Override
-	public void discard() {
-		// TODO Auto-generated method stub
+	public void discard(ArrayList<Card> discardedPlayerCards) {
+		discardedPlayerCards.add(this);
 		
 	}
 
