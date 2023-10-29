@@ -13,7 +13,7 @@ public class ActionTest {
 	
 	static City city1, city2, city3;
 	static Player player;
-	static Card playerCard;
+	static Card playerCard1, playerCard2, playerCard3, playerCard4, playerCard5;
 	static Game game;
 	Action action;
 	static Disease disease;
@@ -40,8 +40,16 @@ public class ActionTest {
         player = new Player();
         player.setCurrentLocation(city1);
         
-        playerCard = new PlayerCard(city1.getName(), disease.getName());
-        player.addToHand(playerCard);
+        playerCard1 = new PlayerCard(city1.getName(), disease.getName());
+        playerCard2 = new PlayerCard(city1.getName(), disease.getName());
+        playerCard3 = new PlayerCard(city1.getName(), disease.getName());
+        playerCard4 = new PlayerCard(city1.getName(), disease.getName());
+        playerCard5 = new PlayerCard(city1.getName(), disease.getName());
+        player.addToHand(playerCard1);
+        player.addToHand(playerCard2);
+        player.addToHand(playerCard3);
+        player.addToHand(playerCard4);
+        player.addToHand(playerCard5);
         
        
         game = new Game();

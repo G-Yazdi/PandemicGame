@@ -9,8 +9,16 @@ public class FindCureAction implements Action {
 	
 	public FindCureAction(Disease disease, CustomArrayList<Disease> diseases, Player player) {
 		
+		CustomArrayList<Card> playerCardsWithSameDisease = player.getHand()
+				.findElementsIfCustom(c-> ((PlayerCard) c).getDiseaseName() == disease.getName());
+		if(playerCardsWithSameDisease.size() < 5) {
+			throw new RuntimeException("Illegal find cure request: There is not enough player cards with the same disease in the player's hand!");
+			
+		}
 		this.disease = disease;
-		this.diseases = diseases;
+		this.diseases = diseases;;
+		
+		
 	}
 
 	@Override
