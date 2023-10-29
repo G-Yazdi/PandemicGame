@@ -20,9 +20,9 @@ public class TreatDiseaseAction implements Action {
 		Disease disease = this.diseases.findIfCustom(d->d.getName() == this.disease.getName());
 		if(disease != null) {
 			if(disease.getHasCure()) {
-				city.removeInfectionCube(null);
+				city.removeAllInfectionCube(disease.getName());
 			}
-			else city.removeInfectionCube(this.disease.getName());
+			else city.removeInfectionCube(disease.getName());
 		}
 	}
 

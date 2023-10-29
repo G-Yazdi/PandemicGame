@@ -16,12 +16,12 @@ public class CustomArrayList<E> extends ArrayList<E> {
 	}
 	public void removeAllIfCustom(Predicate<? super E> filter){
 		Iterator<E> iterator = iterator();
-		while(iterator.hasNext()) {
+		do {
 			E element = iterator.next();
 			if(filter.test(element)) {
-				this.remove(element);
+				iterator.remove();
 			}
-		}
+		}while(iterator.hasNext());
 		
 	}
 	public E findIfCustom(Predicate<? super E> filter){
