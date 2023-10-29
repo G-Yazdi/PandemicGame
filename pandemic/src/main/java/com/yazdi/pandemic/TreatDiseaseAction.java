@@ -17,9 +17,12 @@ public class TreatDiseaseAction implements Action {
 	@Override
 	public void act() {
 		
-		if(this.diseases.findIfCustom(d->d.getName() == this.disease.getName() 
-					&& d.getHasCure()) != null) {
-			city.removeInfectionCube(this.disease.getName());
+		Disease disease = this.diseases.findIfCustom(d->d.getName() == this.disease.getName());
+		if(disease != null) {
+			if(disease.getHasCure()) {
+				city.removeInfectionCube(null);
+			}
+			else city.removeInfectionCube(this.disease.getName());
 		}
 	}
 

@@ -50,6 +50,9 @@ public class City
 	public void removeInfectionCube(String diseaseName) {
 		this.infectionCubes.removeIfCustom(cube->cube.getDisease().getName() == diseaseName);
 	}
+	public void removeAllInfectionCube(String diseaseName) {
+		this.infectionCubes.removeAllIfCustom(cube->cube.getDisease().getName() == diseaseName);
+	}
 	public List<InfectionCube> getInfectionCubes(String diseaseName){
 		return this.getInfectionCubes().stream().filter(
 				i->i.getDisease().getName() == diseaseName).toList();
