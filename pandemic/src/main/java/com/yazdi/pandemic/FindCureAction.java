@@ -7,7 +7,8 @@ public class FindCureAction implements Action {
 	private Disease disease;
 	private CustomArrayList<Disease> diseases;
 	
-	public FindCureAction(Disease disease, CustomArrayList<Disease> diseases) {
+	public FindCureAction(Disease disease, CustomArrayList<Disease> diseases, Player player) {
+		
 		this.disease = disease;
 		this.diseases = diseases;
 	}

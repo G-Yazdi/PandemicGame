@@ -15,9 +15,8 @@ public class BuildResearchStationAction implements Action {
 			this.city = city;
 			this.playerHand = playerHand;
 			this.discardedPlayerCards = discardedPlayerCards;
-			return;
 		}
-		throw new RuntimeException("Illegal build request!");
+		else throw new RuntimeException("Illegal build request!");
 		
 	}
 	@Override

@@ -10,12 +10,12 @@ public class PlayerCard implements Card{
 	
 	public PlayerCard(String cityName, String diseaseName) {
 		this.setCityName(cityName);
-		this.setDisease(diseaseName);
+		this.setDiseaseName(diseaseName);
 	}
-	public String getDisease() {
+	public String getDiseaseName() {
 		return diseaseName;
 	}
-	public void setDisease(String diseaseName) {
+	public void setDiseaseName(String diseaseName) {
 		this.diseaseName = diseaseName;
 	}
 	public String getCityName() {

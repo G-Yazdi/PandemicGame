@@ -25,5 +25,17 @@ public class CustomArrayList<E> extends ArrayList<E> {
 		return null;
 		
 	}
+	public CustomArrayList<E> findElementsIfCustom(Predicate<? super E> filter){
+		Iterator<E> iterator = iterator();
+		CustomArrayList<E> elements = new CustomArrayList<E>();
+		while(iterator.hasNext()) {
+			E element = iterator.next();
+			if(filter.test(element)) {
+				elements.add(element);
+			}
+		}
+		return elements;
+		
+	}
 
 }

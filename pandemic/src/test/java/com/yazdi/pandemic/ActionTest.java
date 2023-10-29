@@ -94,9 +94,16 @@ public class ActionTest {
 	}
 	
 	@Test
+	void notEnoughCardsExceptionTest() {
+	    Throwable exception = assertThrows(RuntimeException.class, 
+	    		() -> new FindCureAction(ActionTest.disease, ActionTest.game.getDiseases(), player));
+	    assertEquals("Illegal find cure request: There is not enough player cards with the same disease in the player's hand!", exception.getMessage());
+	}
+	
+	@Test
 	public void findCureActionTest(){
 		
-		action = new FindCureAction(ActionTest.disease, ActionTest.game.getDiseases());
+		action = new FindCureAction(ActionTest.disease, ActionTest.game.getDiseases(), player);
 		ActionTest.player.act(action);
 		
 		Disease disease = game.getDiseases().findIfCustom(d->((Disease) d).getName() == ActionTest.disease.getName());
