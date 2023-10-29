@@ -109,6 +109,13 @@ public class ActionTest {
 	}
 	
 	@Test
+	void noResearchStationFoundExceptionTest() {
+	    Throwable exception = assertThrows(RuntimeException.class, 
+	    		() -> new FindCureAction(ActionTest.disease, ActionTest.game.getDiseases(), player));
+	    assertEquals("There is no research station in this city!", exception.getMessage());
+	}
+	
+	@Test
 	public void findCureActionTest(){
 		
 		action = new FindCureAction(ActionTest.disease, ActionTest.game.getDiseases(), player);
