@@ -12,8 +12,10 @@ public class FindCureAction implements Action {
 		CustomArrayList<Card> playerCardsWithSameDisease = player.getHand()
 				.findElementsIfCustom(c-> ((PlayerCard) c).getDiseaseName() == disease.getName());
 		if(playerCardsWithSameDisease.size() < 5) {
-			throw new RuntimeException("Illegal find cure request: There is not enough player cards with the same disease in the player's hand!");
-			
+			throw new RuntimeException("Illegal find cure request: There is not enough player cards of the same disease in the player's hand!");		
+		}
+		if(!player.getCurrentLocation().getHasResearchStation()) {
+			throw new RuntimeException("Illegal find cure request: There is no research station in the player's city!");
 		}
 		this.disease = disease;
 		this.diseases = diseases;;

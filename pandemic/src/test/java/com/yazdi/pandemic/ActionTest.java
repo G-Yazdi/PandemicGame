@@ -4,92 +4,68 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import org.junit.jupiter.api.BeforeAll;
-
+import org.junit.jupiter.api.BeforeEach;
 
 import java.util.List;
 
 public class ActionTest {
 	
-	static City city1, city2, city3;
-	static Player player;
-	static Card playerCard1, playerCard2, playerCard3, playerCard4, playerCard5;
-	static Game game;
+	City city1, city2, city3;
+	Player player;
+	Game game;
 	Action action;
-	static Disease disease;
+	Disease disease;
 	
 	
 
-	@BeforeAll
-	public static void init(){
+	@BeforeEach
+	public void init(){
 		city1 = new City("Mashhad");
 		city2 = new City("Zahedan");
-		/*
-		 * 
-		 City1 and city2 are neighbors*/
-		 
-		city1.addNeighbour(city2);
-		city2.addNeighbour(city1);
-		
 		city3 = new City("Tehran");
-		
 		disease = new Disease("Influenza", false);
-	    city1.addInfectionCube(new InfectionCube(disease));
-	    city2.addInfectionCube(new InfectionCube(disease));
-	    
-        player = new Player();
+		player = new Player();
         player.setCurrentLocation(city1);
-        
-        playerCard1 = new PlayerCard(city1.getName(), disease.getName());
-        playerCard2 = new PlayerCard(city1.getName(), disease.getName());
-        playerCard3 = new PlayerCard(city1.getName(), disease.getName());
-        playerCard4 = new PlayerCard(city1.getName(), disease.getName());
-        playerCard5 = new PlayerCard(city1.getName(), disease.getName());
-        player.addToHand(playerCard1);
-        player.addToHand(playerCard2);
-        player.addToHand(playerCard3);
-        player.addToHand(playerCard4);
-        player.addToHand(playerCard5);
-        
        
         game = new Game();
-        game.addCity(city1);
-        game.addCity(city2);
-        game.addCity(city3);
         game.addDisease(disease);
 	}                                        
 	
 	@Test
 	void illegalMoveRequestExceptionTest() {
+		
 	    Throwable exception = assertThrows(RuntimeException.class, 
-	    		() -> new MoveAction(player, city3));
-	    assertEquals("Illegal move request!", exception.getMessage());
+	    		() -> new MoveAction(player, city2));
+	    assertEquals("Illegal move request: The player can not move to a non-neighbor city!", exception.getMessage());
 	}
 	
 	@Test
 	public void moveActionTest(){
+		city1.addNeighbour(city2);
 		
-		action = new MoveAction(player, city1);
-		ActionTest.player.act(action);
+		action = new MoveAction(player, city2);
+		player.act(action);
 		   
-		assertTrue(player.getCurrentLocation() == city1);
+		assertTrue(player.getCurrentLocation() == city2);
 	}
 	
 	@Test
 	void illegalBuildResearchStationRequestExceptionTest() {
 	    Throwable exception = assertThrows(RuntimeException.class, 
-	    		() -> new BuildResearchStationAction(player.getHand(), city3, game.getDiscardedPlayerCards()));
-	    assertEquals("Illegal build request!", exception.getMessage());
+	    		() -> new BuildResearchStationAction(player, game.getDiscardedPlayerCards()));
+	    assertEquals("Illegal build request: The player has no card whose city is the one that he is located on!", exception.getMessage());
 	}
 	
 	@Test
 	public void buildResearchStationActionTest(){
+		Card playerCard1 = new PlayerCard(player.getCurrentLocation().getName(), disease.getName());
+		player.addToHand(playerCard1);
 		
 		int previousSize = game.getDiscardedPlayerCards().size();
 		int previousCount = player.getHand().size();
 		
-		action = new BuildResearchStationAction(player.getHand(), city1, game.getDiscardedPlayerCards());
-		ActionTest.player.act(action);
+		action = new BuildResearchStationAction(player, game.getDiscardedPlayerCards());
+		player.act(action);
 		
 		int currentSize = game.getDiscardedPlayerCards().size();
 		int currentCount = player.getHand().size();
@@ -102,26 +78,41 @@ public class ActionTest {
 	}
 	
 	@Test
-	void notEnoughCardsExceptionTest() {
+	void notEnoughCardsForRequestingFindCureActionExceptionTest() {
+		
 	    Throwable exception = assertThrows(RuntimeException.class, 
-	    		() -> new FindCureAction(ActionTest.disease, ActionTest.game.getDiseases(), player));
-	    assertEquals("Illegal find cure request: There is not enough player cards with the same disease in the player's hand!", exception.getMessage());
+	    		() -> new FindCureAction(disease, game.getDiseases(), player));
+	    assertEquals("Illegal find cure request: There is not enough player cards of the same disease in the player's hand!", exception.getMessage());
+	   
 	}
 	
 	@Test
 	void noResearchStationFoundExceptionTest() {
+		Card playerCard1 = new PlayerCard(player.getCurrentLocation().getName(), disease.getName());
+		player.addToHand(playerCard1);
+		player.addToHand(playerCard1);
+		player.addToHand(playerCard1);
+		player.addToHand(playerCard1);
+		player.addToHand(playerCard1);
 	    Throwable exception = assertThrows(RuntimeException.class, 
-	    		() -> new FindCureAction(ActionTest.disease, ActionTest.game.getDiseases(), player));
-	    assertEquals("There is no research station in this city!", exception.getMessage());
+	    		() -> new FindCureAction(disease, game.getDiseases(), player));
+	    assertEquals("Illegal find cure request: There is no research station in the player's city!", exception.getMessage());
 	}
 	
 	@Test
 	public void findCureActionTest(){
+		Card playerCard1 = new PlayerCard(player.getCurrentLocation().getName(), disease.getName());
+		player.addToHand(playerCard1);
+		player.addToHand(playerCard1);
+		player.addToHand(playerCard1);
+		player.addToHand(playerCard1);
+		player.addToHand(playerCard1);
+		player.getCurrentLocation().setHasResearchStation(true);
 		
-		action = new FindCureAction(ActionTest.disease, ActionTest.game.getDiseases(), player);
-		ActionTest.player.act(action);
+		action = new FindCureAction(disease, game.getDiseases(), player);
+		player.act(action);
 		
-		Disease disease = game.getDiseases().findIfCustom(d->((Disease) d).getName() == ActionTest.disease.getName());
+		Disease disease = game.getDiseases().findIfCustom(d->((Disease) d).getName() == this.disease.getName());
 		if(disease != null) {
 			assertTrue(disease.getHasCure());
 		}
@@ -132,11 +123,14 @@ public class ActionTest {
 	@Test
 	public void treatDiseaseActionTest(){
 		
+		 city1.addInfectionCube(new InfectionCube(disease));
+		 city1.addInfectionCube(new InfectionCube(disease));
+		
 		List<InfectionCube> cubesOfDisease = city1.getInfectionCubes(disease.getName());
 		int previousSize = cubesOfDisease.size();
 		
-		action = new TreatDiseaseAction(disease, city1, ActionTest.game.getDiseases());
-		ActionTest.player.act(action);
+		action = new TreatDiseaseAction(disease, city1, game.getDiseases());
+		player.act(action);
 		
 		cubesOfDisease = city1.getInfectionCubes(disease.getName());
 		int currentSize = cubesOfDisease.size();

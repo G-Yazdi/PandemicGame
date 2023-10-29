@@ -7,8 +7,8 @@ public class MoveAction implements Action {
 	
 	public MoveAction(Player player, City destination) {
 		
-		if (player.getCurrentLocation().getName() != destination.getName()) {
-			 throw new RuntimeException("Illegal move request!");
+		if (player.getCurrentLocation().getNeighbours().findIfCustom(c->c == destination) == null) {
+			 throw new RuntimeException("Illegal move request: The player can not move to a non-neighbor city!");
 		}
 		this.player = player;
 		this.destination = destination;
