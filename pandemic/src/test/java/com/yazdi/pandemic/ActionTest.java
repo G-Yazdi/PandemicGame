@@ -81,7 +81,7 @@ public class ActionTest {
 	void notEnoughCardsForRequestingFindCureActionExceptionTest() {
 		
 	    Throwable exception = assertThrows(RuntimeException.class, 
-	    		() -> new FindCureAction(disease, game.getDiseases(), player));
+	    		() -> new FindCureAction(disease, game, player));
 	    assertEquals("Illegal find cure request: There is not enough player cards of the same disease in the player's hand!", exception.getMessage());
 	   
 	}
@@ -95,7 +95,7 @@ public class ActionTest {
 		player.addToHand(playerCard1);
 		player.addToHand(playerCard1);
 	    Throwable exception = assertThrows(RuntimeException.class, 
-	    		() -> new FindCureAction(disease, game.getDiseases(), player));
+	    		() -> new FindCureAction(disease, game, player));
 	    assertEquals("Illegal find cure request: There is no research station in the player's city!", exception.getMessage());
 	}
 	
@@ -112,7 +112,7 @@ public class ActionTest {
 		int previousSize = player.getHand().size();
 		int previousCount = game.getDiscardedPlayerCards().size();
 		
-		action = new FindCureAction(disease, game.getDiseases(), player);
+		action = new FindCureAction(disease, game, player);
 		player.act(action);
 		
 		int currentSize = player.getHand().size();

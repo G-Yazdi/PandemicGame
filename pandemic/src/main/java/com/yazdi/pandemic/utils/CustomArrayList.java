@@ -24,6 +24,22 @@ public class CustomArrayList<E> extends ArrayList<E> {
 		}while(iterator.hasNext());
 		
 	}
+	public CustomArrayList<E> removeNElementsIfCustom(Predicate<? super E> filter, int n){
+		Iterator<E> iterator = iterator();
+		CustomArrayList<E> removedElements = new CustomArrayList<E>();
+		int count = 0;
+		do {
+			E element = iterator.next();
+			if(filter.test(element)) {
+				iterator.remove();
+				removedElements.add(element);
+				count++;
+			}
+		}while(iterator.hasNext() && count < n);
+		return removedElements;
+		
+	}
+	
 	public E findIfCustom(Predicate<? super E> filter){
 		Iterator<E> iterator = iterator();
 		while(iterator.hasNext()) {
@@ -47,5 +63,6 @@ public class CustomArrayList<E> extends ArrayList<E> {
 		return elements;
 		
 	}
+	
 
 }
