@@ -62,13 +62,13 @@ public class ActionTest {
 		assertTrue(player.getCurrentLocation() == city2);
 	}
 	
-//	@Test
-//	void illegalBuildResearchStationRequestExceptionTest() {
-//	    Throwable exception = assertThrows(RuntimeException.class, 
-//	    		() -> new BuildResearchStationAction(player, game.getDiscardedPlayerCards()));
-//	    assertEquals("Illegal build request: The player has no card whose city is the one that he is located on!", exception.getMessage());
-//	}
-//	
+	@Test
+	void illegalBuildResearchStationRequestExceptionTest() {
+	    Throwable exception = assertThrows(RuntimeException.class, 
+	    		() -> new BuildResearchStationAction(player, game.getDiscardedPlayerCards()));
+	    assertEquals("Illegal build request: The player has no card whose city is the one that he is located on!", exception.getMessage());
+	}
+	
 	@Test
 	public void buildResearchStationActionTest(){
 		Card playerCard1 = new PlayerCard(player.getCurrentLocation().getName(), disease.getName());
@@ -88,6 +88,18 @@ public class ActionTest {
 	            () -> assertEquals(previousSize + 1, currentSize), // check if the card is discarded
 	            () -> assertEquals(previousCount - 1, currentCount) //check if the card is removed from the player's hand
 	    );
+	}
+	
+	@Test
+	public void expertBuildResearchStationActionTest(){
+		
+		Role expert = new Expert(new ExpertBuildResearchStationAction(player));
+		playerWithRole= new Player(expert);
+		
+		Command buildCommand = new BuildResearchStationCommand(playerWithRole, game.getDiscardedPlayerCards());
+		playerWithRole.performAction(buildCommand);
+		
+		assertTrue(player.getCurrentLocation().getHasResearchStation());
 	}
 	
 //	@Test
