@@ -11,7 +11,7 @@ import java.util.List;
 public class ActionTest {
 	
 	City city1, city2, city3;
-	Player player;
+	Player player, playerWithRole;
 	Game game;
 	Action action;
 	Disease disease;
@@ -26,6 +26,7 @@ public class ActionTest {
 		disease = new Disease("Influenza", false);
 		player = new Player();
         player.setCurrentLocation(city1);
+        
        
         game = new Game();
         game.addDisease(disease);
@@ -35,7 +36,7 @@ public class ActionTest {
 	void illegalMoveRequestExceptionTest() {
 		
 	    Throwable exception = assertThrows(RuntimeException.class, 
-	    		() -> new MoveAction(player, city2));
+	    		() -> new MoveAction(player, city2).act());
 	    assertEquals("Illegal move request: The player can not move to a non-neighbor city!", exception.getMessage());
 	}
 	
@@ -53,9 +54,10 @@ public class ActionTest {
 	public void globetrotterMoveActionTest(){
 		
 		Role globetrotter = new Globetrotter(new GlobetrotterMoveAction(player, city2));
-		player.setRole(globetrotter);
+		playerWithRole= new Player(globetrotter);
 		
-		player.act(action);
+		action = new MoveAction(player, city2);
+		playerWithRole.act(action);
 		   
 		assertTrue(player.getCurrentLocation() == city2);
 	}

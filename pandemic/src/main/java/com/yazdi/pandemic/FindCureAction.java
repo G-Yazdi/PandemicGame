@@ -2,7 +2,7 @@ package com.yazdi.pandemic;
 
 import com.yazdi.pandemic.utils.CustomArrayList;
 
-public class FindCureAction implements Action {
+public class FindCureAction extends Action {
 	
 	private Disease disease;
 	private CustomArrayList<Disease> diseases;
@@ -23,6 +23,7 @@ public class FindCureAction implements Action {
 		this.diseases = game.getDiseases();
 		this.player = player;
 		this.pileOfDiscarded = game.getDiscardedPlayerCards();
+		this.setType(ActionType.FindCure);
 	}
 
 	@Override

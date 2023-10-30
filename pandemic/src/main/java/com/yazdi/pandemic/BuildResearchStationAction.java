@@ -3,7 +3,7 @@ package com.yazdi.pandemic;
 
 import com.yazdi.pandemic.utils.CustomArrayList;
 
-public class BuildResearchStationAction implements Action {
+public class BuildResearchStationAction extends Action {
 	
 	private Player player;
 	private CustomArrayList<Card> discardedPlayerCards;
@@ -13,6 +13,7 @@ public class BuildResearchStationAction implements Action {
 		if(player.getHand().findIfCustom(c-> ((PlayerCard) c).getCityName() == player.getCurrentLocation().getName()) != null) {
 			this.player = player;
 			this.discardedPlayerCards = discardedPlayerCards;
+			this.setType(ActionType.Build);
 		}
 		else throw new RuntimeException("Illegal build request: The player has no card whose city is the one that he is located on!");
 		

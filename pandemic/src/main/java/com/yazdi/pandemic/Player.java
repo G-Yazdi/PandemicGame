@@ -7,7 +7,12 @@ public class Player {
 	
 	private City currentLocation;
 	private CustomArrayList<Card> hand;
+	private Role role;
 	
+	public Player(Role role) {
+		this.hand = new CustomArrayList<Card>();
+		this.role = role;
+	}
 	public Player() {
 		this.hand = new CustomArrayList<Card>();
 	}
@@ -21,7 +26,11 @@ public class Player {
 	}
 	
 	public void act(Action action) {
-		action.act();
+		
+		if(this.role != null && this.role.getAction().getType() == action.getType())
+			this.role.getAction().act();
+		else
+			action.act();
 	}
 
 	public CustomArrayList<Card> getHand() {
@@ -43,6 +52,10 @@ public class Player {
 		Card removedCard = this.hand.removeIfCustom(card->((PlayerCard) card).getCityName() == cityName);
 		return removedCard;
 	
+	}
+
+	public Role getRole() {
+		return role;
 	}
 	
 	

@@ -2,7 +2,7 @@ package com.yazdi.pandemic;
 
 import com.yazdi.pandemic.utils.CustomArrayList;
 
-public class TreatDiseaseAction implements Action {
+public class TreatDiseaseAction extends Action {
 	
 	private Disease disease;
 	private City city;
@@ -12,6 +12,7 @@ public class TreatDiseaseAction implements Action {
 		this.disease = disease;
 		this.city = city;
 		this.diseases = diseases;
+		this.setType(ActionType.Treat);
 	}
 
 	@Override
