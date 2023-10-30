@@ -12,7 +12,6 @@ public class ExpertBuildResearchStationAction extends Action {
 
 	public void perform() {
 		player.getCurrentLocation().setHasResearchStation(true);
-
 	}
 
 
