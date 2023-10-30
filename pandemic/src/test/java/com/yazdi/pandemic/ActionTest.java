@@ -40,15 +40,15 @@ public class ActionTest {
 //	    assertEquals("Illegal move request: The player can not move to a non-neighbor city!", exception.getMessage());
 //	}
 	
-//	@Test
-//	public void moveActionTest(){
-//		city1.addNeighbour(city2);
-//		
-//		action = new MoveAction(player, city2);
-//		player.act(action);
-//		   
-//		assertTrue(player.getCurrentLocation() == city2);
-//	}
+	@Test
+	public void moveActionTest(){
+		city1.addNeighbour(city2);
+		
+		Command moveCommand = new MoveCommand(player, city2);
+		player.performAction(moveCommand);
+	   
+		assertTrue(player.getCurrentLocation() == city2);
+	}
 	
 	@Test
 	public void globetrotterMoveActionTest(){
