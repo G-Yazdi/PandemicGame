@@ -50,6 +50,17 @@ public class ActionTest {
 	}
 	
 	@Test
+	public void globetrotterMoveActionTest(){
+		
+		Role globetrotter = new Globetrotter(new GlobetrotterMoveAction(player, city2));
+		player.setRole(globetrotter);
+		
+		player.act(action);
+		   
+		assertTrue(player.getCurrentLocation() == city2);
+	}
+	
+	@Test
 	void illegalBuildResearchStationRequestExceptionTest() {
 	    Throwable exception = assertThrows(RuntimeException.class, 
 	    		() -> new BuildResearchStationAction(player, game.getDiscardedPlayerCards()));
@@ -123,7 +134,7 @@ public class ActionTest {
 			assertAll(
 		            () -> assertTrue(disease.getHasCure()),
 		            () -> assertEquals(previousSize - 5, currentSize), //check if 5 cards are removed from the player's hand
-		            () -> assertEquals(previousCount + 5, currentCount) //check if 5 cards are added to pile of discarded cards
+		            () -> assertEquals(previousCount + 5, currentCount) //check if 5 cards are added to the pile of discarded cards
 		    );
 		}
 		else
