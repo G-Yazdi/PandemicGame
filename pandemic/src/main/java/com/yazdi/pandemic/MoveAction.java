@@ -15,7 +15,7 @@ public class MoveAction extends Action {
 	}
 
 	@Override
-	public void act() {
+	public void perform() {
 		this.player.setCurrentLocation(destination);
 
 	}

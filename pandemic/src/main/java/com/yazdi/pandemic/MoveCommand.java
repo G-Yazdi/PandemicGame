@@ -13,7 +13,7 @@ public class MoveCommand implements Command {
 
 	@Override
 	public void execute() {
-		this.action.act();
+		this.action.perform();
 
 	}
 

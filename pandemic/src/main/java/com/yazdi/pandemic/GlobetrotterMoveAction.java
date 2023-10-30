@@ -12,7 +12,7 @@ public class GlobetrotterMoveAction extends Action {
 		this.setType(ActionType.Move);
 	}
 
-	public void act() {
+	public void perform() {
 		this.player.setCurrentLocation(destination);
 
 	}

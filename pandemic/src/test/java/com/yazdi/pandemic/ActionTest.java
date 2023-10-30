@@ -36,7 +36,7 @@ public class ActionTest {
 	void illegalMoveRequestExceptionTest() {
 		
 	    Throwable exception = assertThrows(RuntimeException.class, 
-	    		() -> new MoveAction(player, city2).act());
+	    		() -> new MoveAction(player, city2).perform());
 	    assertEquals("Illegal move request: The player can not move to a non-neighbor city!", exception.getMessage());
 	}
 	
@@ -69,27 +69,27 @@ public class ActionTest {
 //	    assertEquals("Illegal build request: The player has no card whose city is the one that he is located on!", exception.getMessage());
 //	}
 //	
-//	@Test
-//	public void buildResearchStationActionTest(){
-//		Card playerCard1 = new PlayerCard(player.getCurrentLocation().getName(), disease.getName());
-//		player.addToHand(playerCard1);
-//		
-//		int previousSize = game.getDiscardedPlayerCards().size();
-//		int previousCount = player.getHand().size();
-//		
-//		action = new BuildResearchStationAction(player, game.getDiscardedPlayerCards());
-//		player.act(action);
-//		
-//		int currentSize = game.getDiscardedPlayerCards().size();
-//		int currentCount = player.getHand().size();
-//		
-//		assertAll(
-//	            () -> assertTrue(city1.getHasResearchStation()),
-//	            () -> assertEquals(previousSize + 1, currentSize), // check if the card is discarded
-//	            () -> assertEquals(previousCount - 1, currentCount) //check if the card is removed from the player's hand
-//	    );
-//	}
-//	
+	@Test
+	public void buildResearchStationActionTest(){
+		Card playerCard1 = new PlayerCard(player.getCurrentLocation().getName(), disease.getName());
+		player.addToHand(playerCard1);
+		
+		int previousSize = game.getDiscardedPlayerCards().size();
+		int previousCount = player.getHand().size();
+		
+		Command buildResearchStationCommand = new BuildResearchStationCommand(player, game.getDiscardedPlayerCards());
+		player.performAction(buildResearchStationCommand);
+		
+		int currentSize = game.getDiscardedPlayerCards().size();
+		int currentCount = player.getHand().size();
+		
+		assertAll(
+	            () -> assertTrue(city1.getHasResearchStation()),
+	            () -> assertEquals(previousSize + 1, currentSize), // check if the card is discarded
+	            () -> assertEquals(previousCount - 1, currentCount) //check if the card is removed from the player's hand
+	    );
+	}
+	
 //	@Test
 //	void notEnoughCardsForRequestingFindCureActionExceptionTest() {
 //		

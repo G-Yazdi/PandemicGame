@@ -16,7 +16,7 @@ public class TreatDiseaseAction extends Action {
 	}
 
 	@Override
-	public void act() {
+	public void perform() {
 		
 		Disease disease = this.diseases.findIfCustom(d->d.getName() == this.disease.getName());
 		if(disease != null) {
