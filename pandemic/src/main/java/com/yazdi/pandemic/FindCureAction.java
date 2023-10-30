@@ -18,9 +18,7 @@ public class FindCureAction implements Action {
 			throw new RuntimeException("Illegal find cure request: There is no research station in the player's city!");
 		}
 		this.disease = disease;
-		this.diseases = diseases;;
-		
-		
+		this.diseases = diseases;
 	}
 
 	@Override

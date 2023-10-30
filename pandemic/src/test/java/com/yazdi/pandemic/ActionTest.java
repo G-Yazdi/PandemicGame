@@ -109,12 +109,22 @@ public class ActionTest {
 		player.addToHand(playerCard1);
 		player.getCurrentLocation().setHasResearchStation(true);
 		
+		int previousSize = player.getHand().size();
+		int previousCount = game.getDiscardedPlayerCards().size();
+		
 		action = new FindCureAction(disease, game.getDiseases(), player);
 		player.act(action);
 		
+		int currentSize = player.getHand().size();
+		int currentCount = game.getDiscardedPlayerCards().size();
+		
 		Disease disease = game.getDiseases().findIfCustom(d->((Disease) d).getName() == this.disease.getName());
 		if(disease != null) {
-			assertTrue(disease.getHasCure());
+			assertAll(
+		            () -> assertTrue(disease.getHasCure()),
+		            () -> assertEquals(previousSize - 5, currentSize), //check if 5 cards are removed from the player's hand
+		            () -> assertEquals(previousCount + 5, currentCount) //check if 5 cards are added to pile of discarded cards
+		    );
 		}
 		else
 			assertTrue(false);
