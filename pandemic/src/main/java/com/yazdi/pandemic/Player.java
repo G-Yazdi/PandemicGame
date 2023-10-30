@@ -25,12 +25,9 @@ public class Player {
 		this.currentLocation = currentLocation;
 	}
 	
-	public void act(Action action) {
+	public void performAction(Command command) {
 		
-		if(this.role != null && this.role.getAction().getType() == action.getType())
-			this.role.getAction().act();
-		else
-			action.act();
+		command.execute();
 	}
 
 	public CustomArrayList<Card> getHand() {
