@@ -32,13 +32,13 @@ public class ActionTest {
         game.addDisease(disease);
 	}                                        
 	
-//	@Test
-//	void illegalMoveRequestExceptionTest() {
-//		
-//	    Throwable exception = assertThrows(RuntimeException.class, 
-//	    		() -> new MoveAction(player, city2).act());
-//	    assertEquals("Illegal move request: The player can not move to a non-neighbor city!", exception.getMessage());
-//	}
+	@Test
+	void illegalMoveRequestExceptionTest() {
+		
+	    Throwable exception = assertThrows(RuntimeException.class, 
+	    		() -> new MoveAction(player, city2).act());
+	    assertEquals("Illegal move request: The player can not move to a non-neighbor city!", exception.getMessage());
+	}
 	
 	@Test
 	public void moveActionTest(){
