@@ -9,10 +9,10 @@ public class TreatDiseaseAction extends Action {
 	private CustomArrayList<Disease> diseases;
 	
 	public TreatDiseaseAction(Disease disease, City city, CustomArrayList<Disease> diseases) {
+		super(ActionType.Treat);
 		this.disease = disease;
 		this.city = city;
 		this.diseases = diseases;
-		this.setType(ActionType.Treat);
 	}
 
 	@Override

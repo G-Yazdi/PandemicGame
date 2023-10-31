@@ -9,11 +9,12 @@ public class BuildResearchStationAction extends Action {
 	private CustomArrayList<Card> discardedPlayerCards;
 	
 	public BuildResearchStationAction(Player player, CustomArrayList<Card> discardedPlayerCards) {
-		
+		super(ActionType.Build);
 		if(player.getHand().findIfCustom(c-> ((PlayerCard) c).getCityName() == player.getCurrentLocation().getName()) != null) {
+			
 			this.player = player;
 			this.discardedPlayerCards = discardedPlayerCards;
-			this.setType(ActionType.Build);
+			
 		}
 		else throw new RuntimeException("Illegal build request: The player has no card whose city is the one that he is located on!");
 		

@@ -6,10 +6,9 @@ public class GlobetrotterMoveAction extends Action {
 	private Player player;
 	
 	public GlobetrotterMoveAction(Player player, City destination) {
-		
+		super(ActionType.Move);
 		this.player = player;
 		this.destination = destination;
-		this.setType(ActionType.Move);
 	}
 
 	public void perform() {

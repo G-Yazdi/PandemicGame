@@ -10,7 +10,7 @@ public class FindCureAction extends Action {
 	private CustomArrayList<Card> pileOfDiscarded;
 	
 	public FindCureAction(Disease disease, Game game, Player player) {
-		
+		super(ActionType.FindCure);
 		CustomArrayList<Card> playerCardsOfSameDisease = player.getHand()
 				.findElementsIfCustom(c-> ((PlayerCard) c).getDiseaseName() == disease.getName());
 		if(playerCardsOfSameDisease.size() < 5) {
@@ -23,7 +23,6 @@ public class FindCureAction extends Action {
 		this.diseases = game.getDiseases();
 		this.player = player;
 		this.pileOfDiscarded = game.getDiscardedPlayerCards();
-		this.setType(ActionType.FindCure);
 	}
 
 	@Override

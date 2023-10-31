@@ -6,12 +6,12 @@ public class MoveAction extends Action {
 	private Player player;
 	
 	public MoveAction(Player player, City destination) {
+		super(ActionType.Move);
 		if (player.getCurrentLocation().getNeighbours().findIfCustom(c->c == destination) == null) {
 			 throw new RuntimeException("Illegal move request: The player can not move to a non-neighbor city!");
 		}
 		this.player = player;
 		this.destination = destination;
-		this.setType(ActionType.Move);
 	}
 
 	@Override
