@@ -227,7 +227,7 @@ public class ActionTest {
 		List<InfectionCube> cubesOfDisease = city1.getInfectionCubes(disease.getName());
 		int previousSize = cubesOfDisease.size();
 		
-		Command treatDiseaseCommand = new TreatDiseaseCommand(disease, player.getCurrentLocation(), game.getDiseases());
+		Command treatDiseaseCommand = new TreatDiseaseCommand(disease, player, game.getDiseases());
 		player.performAction(treatDiseaseCommand);
 		
 		cubesOfDisease = city1.getInfectionCubes(disease.getName());
