@@ -5,8 +5,12 @@ public class MoveCommand implements Command {
 	private Action action;
 	
 	public MoveCommand(Player player, City destination) {
-		if(player.getRole()!= null && player.getRole().getAction().getType() == ActionType.Move)
-			action = player.getRole().getAction();
+		if(player.getRole()!= null 
+				&& ((Action) player.getRole()).getType() == ActionType.Move) {
+			action = (Action) player.getRole();
+			((Globetrotter) action).setPlayer(player);
+			((Globetrotter) action).setDestination(destination);
+		}
 		else
 			this.action = new MoveAction(player, destination);
 	}

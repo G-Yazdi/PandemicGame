@@ -53,13 +53,14 @@ public class ActionTest {
 	@Test
 	public void globetrotterMoveActionTest(){
 		
-		Role globetrotter = new Globetrotter(new GlobetrotterMoveAction(player, city2));
+		Role globetrotter = new Globetrotter();
 		playerWithRole= new Player(globetrotter);
+		playerWithRole.setCurrentLocation(city1);
 		
 		Command moveCommand = new MoveCommand(playerWithRole, city2);
 		playerWithRole.performAction(moveCommand);
 		
-		assertTrue(player.getCurrentLocation() == city2);
+		assertTrue(playerWithRole.getCurrentLocation() == city2);
 	}
 	
 	@Test
@@ -93,8 +94,9 @@ public class ActionTest {
 	@Test
 	public void expertBuildResearchStationActionTest(){
 		
-		Role expert = new Expert(new ExpertBuildResearchStationAction(player));
+		Role expert = new Expert();
 		playerWithRole= new Player(expert);
+		playerWithRole.setCurrentLocation(city1);
 		
 		Command buildCommand = new BuildResearchStationCommand(playerWithRole, game.getDiscardedPlayerCards());
 		playerWithRole.performAction(buildCommand);

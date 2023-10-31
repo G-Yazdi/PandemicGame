@@ -1,9 +1,24 @@
 package com.yazdi.pandemic;
 
-public class Expert extends Role {
+public class Expert extends Action implements Role {
 	
-	public Expert(Action action)
-    {
-        super(action);
-    }
+	private Player player;
+	
+	public Expert() {
+		super(ActionType.Build);
+	}
+
+	@Override
+	public void perform() {
+		player.getCurrentLocation().setHasResearchStation(true);
+		
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
 }
