@@ -218,23 +218,23 @@ public class ActionTest {
 			assertTrue(false);
 	}
 	
-//	@Test
-//	public void treatDiseaseWithNoRemedyActionTest(){
-//		
-//		city1.addInfectionCube(new InfectionCube(disease));
-//		city1.addInfectionCube(new InfectionCube(disease));
-//		
-//		List<InfectionCube> cubesOfDisease = city1.getInfectionCubes(disease.getName());
-//		int previousSize = cubesOfDisease.size();
-//		
-//		action = new TreatDiseaseAction(disease, player.getCurrentLocation(), game.getDiseases());
-//		player.act(action);
-//		
-//		cubesOfDisease = city1.getInfectionCubes(disease.getName());
-//		int currentSize = cubesOfDisease.size();
-//		
-//		assertEquals(previousSize - 1, currentSize); 
-//	}
+	@Test
+	public void treatDiseaseWithNoRemedyActionTest(){
+		
+		city1.addInfectionCube(new InfectionCube(disease));
+		city1.addInfectionCube(new InfectionCube(disease));
+		
+		List<InfectionCube> cubesOfDisease = city1.getInfectionCubes(disease.getName());
+		int previousSize = cubesOfDisease.size();
+		
+		Command treatDiseaseCommand = new TreatDiseaseCommand(disease, player.getCurrentLocation(), game.getDiseases());
+		player.performAction(treatDiseaseCommand);
+		
+		cubesOfDisease = city1.getInfectionCubes(disease.getName());
+		int currentSize = cubesOfDisease.size();
+		
+		assertEquals(previousSize - 1, currentSize); 
+	}
 //	@Test
 //	public void treatDiseaseWithRemedyActionTest(){
 //		
