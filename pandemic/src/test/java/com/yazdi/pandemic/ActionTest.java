@@ -183,8 +183,8 @@ public class ActionTest {
 		if(disease != null) {
 			assertAll(
 		            () -> assertTrue(disease.getHasCure()),
-		            () -> assertEquals(previousSize - 4, currentSize), //check if 5 cards are removed from the player's hand
-		            () -> assertEquals(previousCount + 4, currentCount) //check if 5 cards are added to the pile of discarded cards
+		            () -> assertEquals(previousSize - 4, currentSize), //check if 4 cards are removed from the player's hand
+		            () -> assertEquals(previousCount + 4, currentCount) //check if 4 cards are added to the pile of discarded cards
 		    );
 		}
 		else
