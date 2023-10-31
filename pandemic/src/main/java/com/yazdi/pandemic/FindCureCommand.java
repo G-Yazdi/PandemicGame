@@ -7,11 +7,8 @@ public class FindCureCommand implements Command {
 	
 	public FindCureCommand(Disease disease, Game game, Player player) {
 		if(player.getRole()!= null 
-				&& ((Action) player.getRole()).getType() == ActionType.FindCure) {
-			action = (Action) player.getRole();
-			((Scientist) action).setDisease(disease);
-			((Scientist) action).setGame(game);
-			((Scientist) action).setPlayer(player);
+				&& player.getRole().getType() == ActionType.FindCure) {
+			action = new ScientistFindCureAction(disease, game, player);
 			
 		}
 		else

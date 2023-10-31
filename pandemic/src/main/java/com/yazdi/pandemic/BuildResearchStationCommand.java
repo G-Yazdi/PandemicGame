@@ -8,9 +8,8 @@ public class BuildResearchStationCommand implements Command {
 	
 	public BuildResearchStationCommand(Player player, CustomArrayList<Card> discardedPlayerCards) {
 		if(player.getRole()!= null 
-				&& ((Action) player.getRole()).getType() == ActionType.Build) {
-			action = (Action) player.getRole();
-			((Expert) action).setPlayer(player);		
+				&& player.getRole().getType() == ActionType.Build) {
+			action = new ExpertBuildResearchStationAction(player);		
 		}
 		else
 			this.action = new BuildResearchStationAction(player, discardedPlayerCards);
