@@ -1,4 +1,4 @@
-package com.yazdi.pandemic;
+package com.yazdi.pandemic.model;
 
 
 import com.yazdi.pandemic.utils.CustomArrayList;

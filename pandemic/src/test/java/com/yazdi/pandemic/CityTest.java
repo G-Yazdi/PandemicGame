@@ -4,6 +4,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 import org.junit.jupiter.api.Test;
+
+import com.yazdi.pandemic.model.City;
+import com.yazdi.pandemic.model.Disease;
+import com.yazdi.pandemic.model.InfectionCube;
+
 import org.junit.jupiter.api.BeforeEach;
 
 /**

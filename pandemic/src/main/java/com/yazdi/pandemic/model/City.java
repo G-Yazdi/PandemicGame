@@ -1,4 +1,4 @@
-package com.yazdi.pandemic;
+package com.yazdi.pandemic.model;
 
 
 import java.util.List;

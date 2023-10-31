@@ -1,4 +1,4 @@
-package com.yazdi.pandemic;
+package com.yazdi.pandemic.model;
 
 public class Expert extends Role {
 	

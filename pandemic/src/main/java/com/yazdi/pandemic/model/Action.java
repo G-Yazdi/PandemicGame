@@ -1,10 +1,13 @@
-package com.yazdi.pandemic;
+package com.yazdi.pandemic.model;
 
-public abstract class Role {
+public abstract class Action {
 	
 	private ActionType type;
 	
-	public Role(ActionType type) {
+	protected abstract void validate();
+	public abstract void perform();
+	
+	public Action(ActionType type) {
 		this.setType(type);
 	}
 	public ActionType getType() {

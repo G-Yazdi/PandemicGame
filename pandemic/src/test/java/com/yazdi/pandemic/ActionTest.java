@@ -4,6 +4,29 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import com.yazdi.pandemic.model.Action;
+import com.yazdi.pandemic.model.BuildResearchStationAction;
+import com.yazdi.pandemic.model.BuildResearchStationCommand;
+import com.yazdi.pandemic.model.Card;
+import com.yazdi.pandemic.model.City;
+import com.yazdi.pandemic.model.Command;
+import com.yazdi.pandemic.model.Disease;
+import com.yazdi.pandemic.model.Doctor;
+import com.yazdi.pandemic.model.Expert;
+import com.yazdi.pandemic.model.FindCureAction;
+import com.yazdi.pandemic.model.FindCureCommand;
+import com.yazdi.pandemic.model.Game;
+import com.yazdi.pandemic.model.Globetrotter;
+import com.yazdi.pandemic.model.InfectionCube;
+import com.yazdi.pandemic.model.MoveAction;
+import com.yazdi.pandemic.model.MoveCommand;
+import com.yazdi.pandemic.model.Player;
+import com.yazdi.pandemic.model.PlayerCard;
+import com.yazdi.pandemic.model.Role;
+import com.yazdi.pandemic.model.Scientist;
+import com.yazdi.pandemic.model.ScientistFindCureAction;
+import com.yazdi.pandemic.model.TreatDiseaseCommand;
+
 import org.junit.jupiter.api.BeforeEach;
 
 import java.util.List;
