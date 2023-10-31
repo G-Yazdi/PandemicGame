@@ -235,25 +235,25 @@ public class ActionTest {
 		
 		assertEquals(previousSize - 1, currentSize); 
 	}
-//	@Test
-//	public void treatDiseaseWithRemedyActionTest(){
-//		
-//		city1.addInfectionCube(new InfectionCube(disease));
-//		city1.addInfectionCube(new InfectionCube(disease));
-//		
-//		Disease disease = game.getDiseases().findIfCustom(d->d.getName() == this.disease.getName());
-//		disease.setHasCure(true);
-//		
-//		action = new TreatDiseaseAction(disease, player.getCurrentLocation(), game.getDiseases());
-//		player.act(action); 
-//		
-//		List<InfectionCube> cubesOfDisease = city1.getInfectionCubes(disease.getName());// In this case, all the cubes of the disease should be removed from the city1
-//		int currentSize = cubesOfDisease.size();
-//		
-//		assertEquals(0, currentSize); 
-//		
-//		
-//	}
+	@Test
+	public void treatDiseaseWithRemedyActionTest(){
+		
+		city1.addInfectionCube(new InfectionCube(disease));
+		city1.addInfectionCube(new InfectionCube(disease));
+		
+		Disease disease = game.getDiseases().findIfCustom(d->d.getName() == this.disease.getName());
+		disease.setHasCure(true);
+		
+		Command treatDiseaseCommand = new TreatDiseaseCommand(disease, player, game.getDiseases());
+		player.performAction(treatDiseaseCommand); 
+		
+		List<InfectionCube> cubesOfDisease = city1.getInfectionCubes(disease.getName());// In this case, all the cubes of the disease should be removed from the city1
+		int currentSize = cubesOfDisease.size();
+		
+		assertEquals(0, currentSize); 
+		
+		
+	}
 	
 	
 
