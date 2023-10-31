@@ -104,59 +104,59 @@ public class ActionTest {
 		assertTrue(player.getCurrentLocation().getHasResearchStation());
 	}
 	
-//	@Test
-//	void notEnoughCardsForRequestingFindCureActionExceptionTest() {
-//		
-//	    Throwable exception = assertThrows(RuntimeException.class, 
-//	    		() -> new FindCureAction(disease, game, player));
-//	    assertEquals("Illegal find cure request: There is not enough player cards of the same disease in the player's hand!", exception.getMessage());
-//	   
-//	}
-//	
-//	@Test
-//	void noResearchStationFoundExceptionTest() {
-//		Card playerCard1 = new PlayerCard(player.getCurrentLocation().getName(), disease.getName());
-//		player.addToHand(playerCard1);
-//		player.addToHand(playerCard1);
-//		player.addToHand(playerCard1);
-//		player.addToHand(playerCard1);
-//		player.addToHand(playerCard1);
-//	    Throwable exception = assertThrows(RuntimeException.class, 
-//	    		() -> new FindCureAction(disease, game, player));
-//	    assertEquals("Illegal find cure request: There is no research station in the player's city!", exception.getMessage());
-//	}
-//	
-//	@Test
-//	public void findCureActionTest(){
-//		Card playerCard1 = new PlayerCard(player.getCurrentLocation().getName(), disease.getName());
-//		player.addToHand(playerCard1);
-//		player.addToHand(playerCard1);
-//		player.addToHand(playerCard1);
-//		player.addToHand(playerCard1);
-//		player.addToHand(playerCard1);
-//		player.getCurrentLocation().setHasResearchStation(true);
-//		
-//		int previousSize = player.getHand().size();
-//		int previousCount = game.getDiscardedPlayerCards().size();
-//		
-//		action = new FindCureAction(disease, game, player);
-//		player.act(action);
-//		
-//		int currentSize = player.getHand().size();
-//		int currentCount = game.getDiscardedPlayerCards().size();
-//		
-//		Disease disease = game.getDiseases().findIfCustom(d->((Disease) d).getName() == this.disease.getName());
-//		if(disease != null) {
-//			assertAll(
-//		            () -> assertTrue(disease.getHasCure()),
-//		            () -> assertEquals(previousSize - 5, currentSize), //check if 5 cards are removed from the player's hand
-//		            () -> assertEquals(previousCount + 5, currentCount) //check if 5 cards are added to the pile of discarded cards
-//		    );
-//		}
-//		else
-//			assertTrue(false);
-//	}
-//	
+	@Test
+	void notEnoughCardsForRequestingFindCureActionExceptionTest() {
+		
+	    Throwable exception = assertThrows(RuntimeException.class, 
+	    		() -> new FindCureAction(disease, game, player));
+	    assertEquals("Illegal find cure request: There is not enough player cards of the same disease in the player's hand!", exception.getMessage());
+	   
+	}
+	
+	@Test
+	void noResearchStationFoundExceptionTest() {
+		Card playerCard1 = new PlayerCard(player.getCurrentLocation().getName(), disease.getName());
+		player.addToHand(playerCard1);
+		player.addToHand(playerCard1);
+		player.addToHand(playerCard1);
+		player.addToHand(playerCard1);
+		player.addToHand(playerCard1);
+	    Throwable exception = assertThrows(RuntimeException.class, 
+	    		() -> new FindCureAction(disease, game, player));
+	    assertEquals("Illegal find cure request: There is no research station in the player's city!", exception.getMessage());
+	}
+	
+	@Test
+	public void findCureActionTest(){
+		Card playerCard1 = new PlayerCard(player.getCurrentLocation().getName(), disease.getName());
+		player.addToHand(playerCard1);
+		player.addToHand(playerCard1);
+		player.addToHand(playerCard1);
+		player.addToHand(playerCard1);
+		player.addToHand(playerCard1);
+		player.getCurrentLocation().setHasResearchStation(true);
+		
+		int previousSize = player.getHand().size();
+		int previousCount = game.getDiscardedPlayerCards().size();
+		
+		Command findCureCommand = new FindCureCommand(disease, game, player);
+		player.performAction(findCureCommand);
+		
+		int currentSize = player.getHand().size();
+		int currentCount = game.getDiscardedPlayerCards().size();
+		
+		Disease disease = game.getDiseases().findIfCustom(d->((Disease) d).getName() == this.disease.getName());
+		if(disease != null) {
+			assertAll(
+		            () -> assertTrue(disease.getHasCure()),
+		            () -> assertEquals(previousSize - 5, currentSize), //check if 5 cards are removed from the player's hand
+		            () -> assertEquals(previousCount + 5, currentCount) //check if 5 cards are added to the pile of discarded cards
+		    );
+		}
+		else
+			assertTrue(false);
+	}
+	
 //	@Test
 //	public void treatDiseaseWithNoRemedyActionTest(){
 //		
