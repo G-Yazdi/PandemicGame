@@ -27,4 +27,10 @@ public class TreatDiseaseAction extends Action {
 		}
 	}
 
+	@Override
+	protected void validate() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

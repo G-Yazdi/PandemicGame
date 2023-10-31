@@ -66,7 +66,7 @@ public class ActionTest {
 	@Test
 	void illegalBuildResearchStationRequestExceptionTest() {
 	    Throwable exception = assertThrows(RuntimeException.class, 
-	    		() -> new BuildResearchStationAction(player, game.getDiscardedPlayerCards()));
+	    		() -> new BuildResearchStationAction(player, game.getDiscardedPlayerCards()).perform());
 	    assertEquals("Illegal build request: The player has no card whose city is the one that he is located on!", exception.getMessage());
 	}
 	
@@ -108,7 +108,7 @@ public class ActionTest {
 	void notEnoughCardsForRequestingFindCureActionExceptionTest() {
 		
 	    Throwable exception = assertThrows(RuntimeException.class, 
-	    		() -> new FindCureAction(disease, game, player));
+	    		() -> new FindCureAction(disease, game, player).perform());
 	    assertEquals("Illegal find cure request: There is not enough player cards of the same disease in the player's hand!", exception.getMessage());
 	   
 	}
@@ -122,7 +122,7 @@ public class ActionTest {
 		player.addToHand(playerCard1);
 		player.addToHand(playerCard1);
 	    Throwable exception = assertThrows(RuntimeException.class, 
-	    		() -> new FindCureAction(disease, game, player));
+	    		() -> new FindCureAction(disease, game, player).perform());
 	    assertEquals("Illegal find cure request: There is no research station in the player's city!", exception.getMessage());
 	}
 	

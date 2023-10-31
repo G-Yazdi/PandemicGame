@@ -15,16 +15,7 @@ public class Scientist extends Action implements Role {
 
 	@Override
 	public void perform() {
-		
-		CustomArrayList<Card> playerCardsOfSameDisease = player.getHand()
-				.findElementsIfCustom(c-> ((PlayerCard) c).getDiseaseName() == disease.getName());
-		if(playerCardsOfSameDisease.size() < 4) {
-			throw new RuntimeException("Illegal find cure request: There is not enough player cards of the same disease in the player's hand!");		
-		}
-		if(!player.getCurrentLocation().getHasResearchStation()) {
-			throw new RuntimeException("Illegal find cure request: There is no research station in the player's city!");
-		}
-		
+		validate();
 		Disease disease = game.getDiseases().findIfCustom(d->d.getName() == this.disease.getName());
 		if(disease != null) {
 			disease.setHasCure(true);
@@ -57,6 +48,19 @@ public class Scientist extends Action implements Role {
 
 	public void setGame(Game game) {
 		this.game = game;
+	}
+
+	@Override
+	protected void validate() {
+		CustomArrayList<Card> playerCardsOfSameDisease = player.getHand()
+				.findElementsIfCustom(c-> ((PlayerCard) c).getDiseaseName() == disease.getName());
+		if(playerCardsOfSameDisease.size() < 4) {
+			throw new RuntimeException("Illegal find cure request: There is not enough player cards of the same disease in the player's hand!");		
+		}
+		if(!player.getCurrentLocation().getHasResearchStation()) {
+			throw new RuntimeException("Illegal find cure request: There is no research station in the player's city!");
+		}
+		
 	}
 
 }

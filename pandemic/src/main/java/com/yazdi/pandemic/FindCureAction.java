@@ -11,14 +11,6 @@ public class FindCureAction extends Action {
 	
 	public FindCureAction(Disease disease, Game game, Player player) {
 		super(ActionType.FindCure);
-		CustomArrayList<Card> playerCardsOfSameDisease = player.getHand()
-				.findElementsIfCustom(c-> ((PlayerCard) c).getDiseaseName() == disease.getName());
-		if(playerCardsOfSameDisease.size() < 5) {
-			throw new RuntimeException("Illegal find cure request: There is not enough player cards of the same disease in the player's hand!");		
-		}
-		if(!player.getCurrentLocation().getHasResearchStation()) {
-			throw new RuntimeException("Illegal find cure request: There is no research station in the player's city!");
-		}
 		this.disease = disease;
 		this.diseases = game.getDiseases();
 		this.player = player;
@@ -27,12 +19,26 @@ public class FindCureAction extends Action {
 
 	@Override
 	public void perform() {
+		validate();
 		Disease disease = this.diseases.findIfCustom(d->d.getName() == this.disease.getName());
 		if(disease != null) {
 			disease.setHasCure(true);
 			CustomArrayList<Card> removedCards = player.getHand().removeNElementsIfCustom(c-> ((PlayerCard) c).getDiseaseName() == disease.getName(), 5);
 			this.pileOfDiscarded.addAll(removedCards);
 			
+		}
+		
+	}
+
+	@Override
+	protected void validate() {
+		CustomArrayList<Card> playerCardsOfSameDisease = player.getHand()
+				.findElementsIfCustom(c-> ((PlayerCard) c).getDiseaseName() == disease.getName());
+		if(playerCardsOfSameDisease.size() < 5) {
+			throw new RuntimeException("Illegal find cure request: There is not enough player cards of the same disease in the player's hand!");		
+		}
+		if(!player.getCurrentLocation().getHasResearchStation()) {
+			throw new RuntimeException("Illegal find cure request: There is no research station in the player's city!");
 		}
 		
 	}

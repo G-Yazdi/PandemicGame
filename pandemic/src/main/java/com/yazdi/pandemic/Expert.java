@@ -21,4 +21,10 @@ public class Expert extends Action implements Role {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
+
+	@Override
+	protected void validate() {
+		// TODO Auto-generated method stub
+		
+	}
 }

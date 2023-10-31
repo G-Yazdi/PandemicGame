@@ -29,6 +29,12 @@ public class Globetrotter extends Action implements Role {
 	public void setDestination(City destination) {
 		this.destination = destination;
 	}
+
+	@Override
+	protected void validate() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 
