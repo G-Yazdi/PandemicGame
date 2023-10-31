@@ -157,6 +157,40 @@ public class ActionTest {
 			assertTrue(false);
 	}
 	
+	@Test
+	public void ScientistFindCureActionTest(){
+		Role scientist = new Scientist();
+		playerWithRole= new Player(scientist);
+		playerWithRole.setCurrentLocation(city1);
+		
+		Card playerCard1 = new PlayerCard(playerWithRole.getCurrentLocation().getName(), disease.getName());
+		playerWithRole.addToHand(playerCard1);
+		playerWithRole.addToHand(playerCard1);
+		playerWithRole.addToHand(playerCard1);
+		playerWithRole.addToHand(playerCard1);
+		playerWithRole.getCurrentLocation().setHasResearchStation(true);
+		
+		int previousSize = playerWithRole.getHand().size();
+		int previousCount = game.getDiscardedPlayerCards().size();
+		
+		Command findCureCommand = new FindCureCommand(disease, game, playerWithRole);
+		playerWithRole.performAction(findCureCommand);
+		
+		int currentSize = playerWithRole.getHand().size();
+		int currentCount = game.getDiscardedPlayerCards().size();
+		
+		Disease disease = game.getDiseases().findIfCustom(d->((Disease) d).getName() == this.disease.getName());
+		if(disease != null) {
+			assertAll(
+		            () -> assertTrue(disease.getHasCure()),
+		            () -> assertEquals(previousSize - 4, currentSize), //check if 5 cards are removed from the player's hand
+		            () -> assertEquals(previousCount + 4, currentCount) //check if 5 cards are added to the pile of discarded cards
+		    );
+		}
+		else
+			assertTrue(false);
+	}
+	
 //	@Test
 //	public void treatDiseaseWithNoRemedyActionTest(){
 //		
