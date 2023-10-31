@@ -105,7 +105,7 @@ public class ActionTest {
 	}
 	
 	@Test
-	void notEnoughCardsForRequestingFindCureActionExceptionTest() {
+	void notEnoughCardsForPerformingFindCureActionExceptionTest() {
 		
 	    Throwable exception = assertThrows(RuntimeException.class, 
 	    		() -> new FindCureAction(disease, game, player).perform());
@@ -114,7 +114,7 @@ public class ActionTest {
 	}
 	
 	@Test
-	void noResearchStationFoundExceptionTest() {
+	void noResearchStationFoundForPerformingFindCureActionExceptionTest() {
 		Card playerCard1 = new PlayerCard(player.getCurrentLocation().getName(), disease.getName());
 		player.addToHand(playerCard1);
 		player.addToHand(playerCard1);
@@ -157,6 +157,33 @@ public class ActionTest {
 			assertTrue(false);
 	}
 	
+	@Test
+	void notEnoughCardsForPerformingScientistFindCureActionExceptionTest() {
+		Role scientist = new Scientist();
+		playerWithRole= new Player(scientist);
+		playerWithRole.setCurrentLocation(city1);
+		
+	    Throwable exception = assertThrows(RuntimeException.class, 
+	    		() -> new ScientistFindCureAction(disease, game, playerWithRole).perform());
+	    assertEquals("Illegal find cure request: There is not enough player cards of the same disease in the player's hand!", exception.getMessage());
+	   
+	}
+	
+	@Test
+	void noResearchStationFoundForPerformingScientistFindCureActionExceptionTest() {
+		Role scientist = new Scientist();
+		playerWithRole= new Player(scientist);
+		playerWithRole.setCurrentLocation(city1);
+		
+		Card playerCard1 = new PlayerCard(playerWithRole.getCurrentLocation().getName(), disease.getName());
+		playerWithRole.addToHand(playerCard1);
+		playerWithRole.addToHand(playerCard1);
+		playerWithRole.addToHand(playerCard1);
+		playerWithRole.addToHand(playerCard1);
+	    Throwable exception = assertThrows(RuntimeException.class, 
+	    		() -> new ScientistFindCureAction(disease, game, playerWithRole).perform());
+	    assertEquals("Illegal find cure request: There is no research station in the player's city!", exception.getMessage());
+	}
 	@Test
 	public void ScientistFindCureActionTest(){
 		Role scientist = new Scientist();
