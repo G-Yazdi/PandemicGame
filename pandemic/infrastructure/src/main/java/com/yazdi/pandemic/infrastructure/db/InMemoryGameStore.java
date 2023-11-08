@@ -18,4 +18,11 @@ public class InMemoryGameStore implements PlayerRepository {
     public static InMemoryGameStore provider() {
         return instance;
     }
+
+	@Override
+	public void updatePlayerLocationResearchStationStatus(int playerId, boolean hasResearchStation) {
+		City playerLocation = this.gameDb.get(playerId);
+		playerLocation.setHasResearchStation(hasResearchStation);
+		
+	}
 }
