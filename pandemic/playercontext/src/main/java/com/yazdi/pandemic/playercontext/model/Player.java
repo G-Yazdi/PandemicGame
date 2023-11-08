@@ -1,18 +1,23 @@
 package com.yazdi.pandemic.playercontext.model;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Player {
 		
 		private City currentLocation;
 		private CustomArrayList<Card> hand;
 		private Role role;
 		private int id;
+		private static AtomicInteger uniqueId=new AtomicInteger();
 		
 		public Player(Role role) {
 			this.hand = new CustomArrayList<Card>();
 			this.role = role;
+			id = uniqueId.getAndIncrement();
 		}
 		public Player() {
 			this.hand = new CustomArrayList<Card>();
+			id = uniqueId.getAndIncrement();
 		}
 
 		public City getCurrentLocation() {
