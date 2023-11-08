@@ -16,6 +16,7 @@ import com.yazdi.pandemic.sharedkernel.events.EventBus;
 
 public class PlayerService implements IPlayerService {
     public static final String EVENT_Player_Moved = "PlayerMovedEvent";
+    public static final String EVENT_Player_Built_A_Research_Station = "PlayerBuiltAResearchStationEvent";
 
     private PlayerRepository playerRepository;
     private EventBus eventBus;
@@ -52,6 +53,29 @@ public class PlayerService implements IPlayerService {
 	    	@Override
 	    	public String getType() {
 	    		return EVENT_Player_Moved;
+	    	}
+	    };
+	    this.eventBus.publish(event);
+		
+	}
+	@Override
+	public void buildResearchStation(Player player) {
+		if(player.getRole().getType() == ActionType.Build) {
+			Action action = new ExpertBuildAction(player);
+			action.perform();
+		}
+		else {
+			Action action = new BuildAction(player);
+			action.perform();
+		}
+		this.playerRepository.updatePlayerLocationResearchStationStatus(player.getId(), true);
+		
+	    Map<String, String> payload = new HashMap<>();
+	    payload.put("player_id", String.valueOf(player.getId()));
+	    ApplicationEvent event = new ApplicationEvent(payload) {
+	    	@Override
+	    	public String getType() {
+	    		return EVENT_Player_Built_A_Research_Station;
 	    	}
 	    };
 	    this.eventBus.publish(event);
