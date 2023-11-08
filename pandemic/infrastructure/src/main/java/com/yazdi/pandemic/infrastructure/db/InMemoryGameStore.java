@@ -21,8 +21,17 @@ public class InMemoryGameStore implements PlayerRepository {
 
 	@Override
 	public void updatePlayerLocationResearchStationStatus(int playerId, boolean hasResearchStation) {
-		City playerLocation = this.gameDb.get(playerId);
-		playerLocation.setHasResearchStation(hasResearchStation);
+		City playerLocation;
+		if(this.gameDb.get(playerId) != null) {
+			playerLocation = this.gameDb.get(playerId);
+			playerLocation.setHasResearchStation(hasResearchStation);
+		}
+		else {
+			playerLocation = new City("defaultCity");
+			playerLocation.setHasResearchStation(true);
+		}
+		this.gameDb.put(playerId, playerLocation);
+		
 		
 	}
 }

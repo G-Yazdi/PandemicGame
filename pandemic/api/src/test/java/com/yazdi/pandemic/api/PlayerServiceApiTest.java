@@ -1,6 +1,6 @@
 package com.yazdi.pandemic.api;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.yazdi.pandemic.playercontext.model.City;
+import com.yazdi.pandemic.playercontext.model.ExpertRole;
 import com.yazdi.pandemic.playercontext.model.GlobetrotterRole;
 import com.yazdi.pandemic.playercontext.model.Player;
 import com.yazdi.pandemic.playercontext.model.Role;
@@ -46,6 +47,7 @@ public class PlayerServiceApiTest {
 		Role role = new GlobetrotterRole();
 		Player player1 = new Player(role);
 		City city = new City("Mashhad");
+		player1.setCurrentLocation(city);
 		City destination = new City("Zahedan");
 		city.addNeighbour(destination);
 		PlayerServiceApi api = new PlayerServiceApi(playerService);
@@ -58,6 +60,9 @@ public class PlayerServiceApiTest {
 	public void buildServiceTest() {
 		Role role = new ExpertRole();
 		Player player1 = new Player(role);
+		City city = new City("Mashhad");
+		player1.setCurrentLocation(city);
+		
 		PlayerServiceApi api = new PlayerServiceApi(playerService);
 		api.buildService(player1);
 		assertTrue(player1.getCurrentLocation().getHasResearchStation());
