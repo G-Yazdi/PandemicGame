@@ -8,6 +8,7 @@ import com.yazdi.pandemic.sharedkernel.service.ApplicationService;
 public interface IPlayerService extends ApplicationService {
 	
     void movePlayer(Player player, City destination);
+    void buildResearchStation(Player player);
 
 	void setPlayerRepository(PlayerRepository playerRepository);
 }
