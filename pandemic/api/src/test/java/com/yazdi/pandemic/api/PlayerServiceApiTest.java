@@ -13,7 +13,9 @@ import com.yazdi.pandemic.playercontext.model.City;
 import com.yazdi.pandemic.playercontext.model.ExpertRole;
 import com.yazdi.pandemic.playercontext.model.GlobetrotterRole;
 import com.yazdi.pandemic.playercontext.model.Player;
+import com.yazdi.pandemic.playercontext.model.PlayerCard;
 import com.yazdi.pandemic.playercontext.model.Role;
+import com.yazdi.pandemic.playercontext.model.Card;
 import com.yazdi.pandemic.playercontext.repository.PlayerRepository;
 import com.yazdi.pandemic.playercontext.service.IPlayerService;
 import com.yazdi.pandemic.sharedkernel.events.EventBus;
@@ -55,6 +57,19 @@ public class PlayerServiceApiTest {
 		assertEquals(player1.getCurrentLocation().getName(), destination.getName());
 		
 	}
+	@Test
+	public void moveAsNotGlobetrotterServiceTest() {
+		Role role = new ExpertRole();
+		Player player1 = new Player(role);
+		City city1 = new City("Mashhad");
+		player1.setCurrentLocation(city1);
+		City destination = new City("Zahedan");
+		city1.addNeighbour(destination);
+		PlayerServiceApi api = new PlayerServiceApi(playerService);
+		api.moveService(player1, destination);
+		assertEquals(player1.getCurrentLocation().getName(), destination.getName());
+		
+	}
 	
 	@Test
 	public void buildAsExpertServiceTest() {
@@ -67,6 +82,5 @@ public class PlayerServiceApiTest {
 		api.buildService(player1);
 		assertTrue(player1.getCurrentLocation().getHasResearchStation());
 	}
-	
 
 }
