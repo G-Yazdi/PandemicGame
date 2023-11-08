@@ -4,15 +4,15 @@ import com.yazdi.pandemic.playercontext.model.City;
 import com.yazdi.pandemic.playercontext.model.Player;
 import com.yazdi.pandemic.playercontext.service.IPlayerService;
 
-public class Api {
+public class PlayerServiceApi {
 private IPlayerService playerService;
 	
 	
-	public Api(IPlayerService playerService) {
+	public PlayerServiceApi(IPlayerService playerService) {
 		this.playerService = playerService;
 	}
 	
-	public void movePlayerService(Player player, City destination) {
+	public void moveService(Player player, City destination) {
 		 playerService.movePlayer(player, destination);
 	}
 
