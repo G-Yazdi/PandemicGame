@@ -43,7 +43,7 @@ public class PlayerServiceApiTest {
 	 
 	
 	@Test
-	public void moveServiceTest() {
+	public void moveAsGlobetrotterServiceTest() {
 		Role role = new GlobetrotterRole();
 		Player player1 = new Player(role);
 		City city = new City("Mashhad");
@@ -57,7 +57,7 @@ public class PlayerServiceApiTest {
 	}
 	
 	@Test
-	public void buildServiceTest() {
+	public void buildAsExpertServiceTest() {
 		Role role = new ExpertRole();
 		Player player1 = new Player(role);
 		City city = new City("Mashhad");
