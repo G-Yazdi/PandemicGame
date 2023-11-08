@@ -37,12 +37,13 @@ public class PlayerService implements IPlayerService {
 
 	@Override
 	public void movePlayer(Player player, City destination) {
+		Action action;
 		if(player.getRole().getType() == ActionType.Move) {
-			Action action = new GlobetrotterMoveAction(player, destination);
+			action = new GlobetrotterMoveAction(player, destination);
 			action.perform();
 		}
 		else {
-			Action action = new MoveAction(player, destination);
+			action = new MoveAction(player, destination);
 			action.perform();
 		}
 		this.playerRepository.updatePlayerLocation(player.getId(), destination);
@@ -60,12 +61,14 @@ public class PlayerService implements IPlayerService {
 	}
 	@Override
 	public void buildResearchStation(Player player) {
+		Action action;
+		
 		if(player.getRole().getType() == ActionType.Build) {
-			Action action = new ExpertBuildAction(player);
+			action = new ExpertBuildAction(player);
 			action.perform();
 		}
 		else {
-			Action action = new BuildAction(player);
+			action = new BuildAction(player);
 			action.perform();
 		}
 		this.playerRepository.updatePlayerLocationResearchStationStatus(player.getId(), true);
