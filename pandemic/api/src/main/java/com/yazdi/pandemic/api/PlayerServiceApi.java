@@ -15,5 +15,8 @@ private IPlayerService playerService;
 	public void moveService(Player player, City destination) {
 		 playerService.movePlayer(player, destination);
 	}
+	public void buildService(Player player) {
+		 playerService.buildResearchStation(player);
+	}
 
 }
