@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.yazdi.pandemic.playercontext.model.City;
+import com.yazdi.pandemic.playercontext.model.Disease;
 import com.yazdi.pandemic.playercontext.model.ExpertRole;
 import com.yazdi.pandemic.playercontext.model.GlobetrotterRole;
 import com.yazdi.pandemic.playercontext.model.Player;
@@ -100,6 +101,41 @@ public class PlayerServiceApiTest {
 		PlayerServiceApi api = new PlayerServiceApi(playerService);
 		api.buildService(player1);
 		assertTrue(player1.getCurrentLocation().getHasResearchStation());
+	}
+	@Test
+	void illegalBuildExceptionTest() {
+		Role role = new GlobetrotterRole();
+		Player player1 = new Player(role);
+		City city = new City("Mashhad");
+		player1.setCurrentLocation(city);
+		
+		PlayerServiceApi api = new PlayerServiceApi(playerService);
+	    Throwable exception = assertThrows(RuntimeException.class, 
+	    		() -> api.buildService(player1));
+	    assertEquals("Illegal build request: The player has no card whose city is the one that he is located on!", exception.getMessage());
+	}
+	@Test
+	public void buildAsNotExpertServiceTest() {
+		Role role = new GlobetrotterRole();
+		Player player1 = new Player(role);
+		City city1 = new City("Mashhad");
+		player1.setCurrentLocation(city1);
+		
+		Disease disease = new Disease("Influenza", false);
+		Card playerCard1 = new PlayerCard(player1.getCurrentLocation().getName(), disease.getName());
+		player1.addToHand(playerCard1);
+		
+		int previousSize = player1.getHand().size();
+		
+		PlayerServiceApi api = new PlayerServiceApi(playerService);
+		api.buildService(player1);
+		
+		int currentSize = player1.getHand().size();
+		
+		assertAll(
+	            () -> assertTrue(city1.getHasResearchStation()),
+	            () -> assertEquals(previousSize - 1, currentSize)); // check if the card is removed from the player's hand
+		
 	}
 
 }
