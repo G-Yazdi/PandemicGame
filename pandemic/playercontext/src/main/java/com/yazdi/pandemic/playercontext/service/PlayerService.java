@@ -9,6 +9,7 @@ import java.util.Map;
 import com.yazdi.pandemic.playercontext.model.Action;
 import com.yazdi.pandemic.playercontext.model.City;
 import com.yazdi.pandemic.playercontext.model.Disease;
+import com.yazdi.pandemic.playercontext.model.DoctorTreatAction;
 import com.yazdi.pandemic.playercontext.model.ExpertBuildAction;
 import com.yazdi.pandemic.playercontext.model.FindCureAction;
 import com.yazdi.pandemic.playercontext.model.GlobetrotterMoveAction;
@@ -122,11 +123,11 @@ public class PlayerService implements IPlayerService {
 		Action action;
 		
 		if(player.getRole().getType() == ActionType.Treat) {
-			action = new DoctorTreatDiseaseAction(player, disease);
+			action = new DoctorTreatAction(player, disease);
 			action.perform();
 		}
 		else {
-			action = new TreatDiseaseAction(player, disease);
+			action = new TreatAction(player, disease);
 			action.perform();
 		}
 		this.playerRepository.updatePlayerLocationCubes(player.getId(), player.getCurrentLocation());
