@@ -25,4 +25,9 @@ private IPlayerService playerService;
 		
 	}
 
+	public void treatDiseaseService(Player player, Disease disease) {
+		playerService.treatDisease(player, disease);
+		
+	}
+
 }
