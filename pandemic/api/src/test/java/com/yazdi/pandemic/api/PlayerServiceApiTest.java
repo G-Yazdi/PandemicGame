@@ -1,6 +1,7 @@
 package com.yazdi.pandemic.api;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -57,6 +58,23 @@ public class PlayerServiceApiTest {
 		assertEquals(player1.getCurrentLocation().getName(), destination.getName());
 		
 	}
+	
+	
+	  @Test 
+	  public void illegalMoveExceptionTest() { 
+		  Role role = new ExpertRole(); 
+		  Player  player1 = new Player(role); 
+		  City city1 = new City("Mashhad");
+		  player1.setCurrentLocation(city1); 
+		  City destination = new City("Zahedan");
+		  
+		  PlayerServiceApi api = new PlayerServiceApi(playerService); 
+		  Throwable exception = assertThrows(RuntimeException.class, () -> api.moveService(player1, destination));
+		  assertEquals("Illegal move request: The player can not move to a non-neighbor city!", exception.getMessage());
+	  }
+	 
+	 
+	
 	@Test
 	public void moveAsNotGlobetrotterServiceTest() {
 		Role role = new ExpertRole();
@@ -65,6 +83,7 @@ public class PlayerServiceApiTest {
 		player1.setCurrentLocation(city1);
 		City destination = new City("Zahedan");
 		city1.addNeighbour(destination);
+		
 		PlayerServiceApi api = new PlayerServiceApi(playerService);
 		api.moveService(player1, destination);
 		assertEquals(player1.getCurrentLocation().getName(), destination.getName());
