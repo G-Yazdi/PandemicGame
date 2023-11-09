@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.yazdi.pandemic.playercontext.model.City;
+import com.yazdi.pandemic.playercontext.model.Cube;
 import com.yazdi.pandemic.playercontext.model.Disease;
 import com.yazdi.pandemic.playercontext.model.ExpertRole;
 import com.yazdi.pandemic.playercontext.model.GlobetrotterRole;
@@ -243,9 +244,27 @@ public class PlayerServiceApiTest {
 		int currentSize = player1.getHand().size();
 		
 		assertAll(
-		            () -> assertTrue(disease.getHasCure()),
-		            () -> assertEquals(previousSize - 5, currentSize) //check if 5 cards are removed from the player's hand
+				() -> assertTrue(disease.getHasCure()),
+		        () -> assertEquals(previousSize - 5, currentSize) //check if 5 cards are removed from the player's hand
 		    );
+	}
+	@Test
+	public void treatDiseaseAsDoctorServiceTest(){
+		Role role = new DoctorRole();
+		Player player1 = new Player(role);
+		City city1 = new City("Mashhad");
+		player1.setCurrentLocation(city1);
+		Disease disease = new Disease("Influenza", false);
+		city1.addCube(new Cube(disease));
+		city1.addCube(new Cube(disease));
+		
+		PlayerServiceApi api = new PlayerServiceApi(playerService);
+		api.treatDiseaseService(player1, disease); 
+		
+		List<Cube> cubesOfDisease = city1.getCubes(disease);// In this case, all the cubes of the disease should be removed from the city1
+		int currentSize = cubesOfDisease.size();
+		
+		assertEquals(0, currentSize);	
 	}
 	
 }
