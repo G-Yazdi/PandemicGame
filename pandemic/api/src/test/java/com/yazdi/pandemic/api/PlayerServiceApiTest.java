@@ -167,5 +167,53 @@ public class PlayerServiceApiTest {
 	    assertEquals("Illegal find cure request: There is not enough player cards of the same disease in the player's hand!", exception.getMessage());
 	   
 	}
+	@Test
+	void noResearchStationFoundForFindingCureAsNotScientistExceptionTest() {
+		Role role = new GlobetrotterRole();
+		Player player1 = new Player(role);
+		City city1 = new City("Mashhad");
+		player1.setCurrentLocation(city1);
+		Disease disease = new Disease("Influenza", false);
+		
+		Card playerCard1 = new PlayerCard(player1.getCurrentLocation().getName(), disease.getName());
+		player1.addToHand(playerCard1);
+		player1.addToHand(playerCard1);
+		player1.addToHand(playerCard1);
+		player1.addToHand(playerCard1);
+		player1.addToHand(playerCard1);
+		
+		PlayerServiceApi api = new PlayerServiceApi(playerService);
+	    Throwable exception = assertThrows(RuntimeException.class, 
+	    		() -> api.findCureService(player1, disease));
+	    assertEquals("Illegal find cure request: There is no research station in the player's city!", exception.getMessage());
+	}
+	@Test
+	public void findCureAsNotScientistServiceTest(){
+		Role role = new GlobetrotterRole();
+		Player player1 = new Player(role);
+		City city1 = new City("Mashhad");
+		player1.setCurrentLocation(city1);
+		Disease disease = new Disease("Influenza", false);
+		
+		Card playerCard1 = new PlayerCard(player1.getCurrentLocation().getName(), disease.getName());
+		player1.addToHand(playerCard1);
+		player1.addToHand(playerCard1);
+		player1.addToHand(playerCard1);
+		player1.addToHand(playerCard1);
+		player1.addToHand(playerCard1);
+		player1.getCurrentLocation().setHasResearchStation(true);
+		
+		int previousSize = player1.getHand().size();
+		
+		PlayerServiceApi api = new PlayerServiceApi(playerService);
+		api.findCureService(player1, disease);
+		
+		int currentSize = player1.getHand().size();
+		
+		assertAll(
+		            () -> assertTrue(disease.getHasCure()),
+		            () -> assertEquals(previousSize - 5, currentSize) //check if 5 cards are removed from the player's hand
+		    );
+	}
 	
 }
