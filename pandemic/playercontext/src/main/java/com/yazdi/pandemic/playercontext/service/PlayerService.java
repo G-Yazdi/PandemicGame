@@ -23,6 +23,7 @@ public class PlayerService implements IPlayerService {
     public static final String EVENT_Player_Moved = "PlayerMovedEvent";
     public static final String EVENT_Player_Built_A_Research_Station = "PlayerBuiltAResearchStationEvent";
     public static final String EVENT_Player_Found_A_Cure_For_A_Disease = "PlayerFoundACureForADiseaseEvent";
+    public static final String EVENT_Player_Treated_A_Disease = "PlayerTreatedADiseaseEvent";
 
     private PlayerRepository playerRepository;
     private EventBus eventBus;
@@ -111,6 +112,31 @@ public class PlayerService implements IPlayerService {
 	    	@Override
 	    	public String getType() {
 	    		return EVENT_Player_Found_A_Cure_For_A_Disease;
+	    	}
+	    };
+	    this.eventBus.publish(event);
+		
+	}
+	@Override
+	public void treatDisease(Player player, Disease disease) {
+		Action action;
+		
+		if(player.getRole().getType() == ActionType.Treat) {
+			action = new DoctorTreatDiseaseAction(player, disease);
+			action.perform();
+		}
+		else {
+			action = new TreatDiseaseAction(player, disease);
+			action.perform();
+		}
+		this.playerRepository.updatePlayerLocationCubes(player.getId(), player.getCurrentLocation());
+		
+	    Map<String, String> payload = new HashMap<>();
+	    payload.put("player_id", String.valueOf(player.getId()));
+	    ApplicationEvent event = new ApplicationEvent(payload) {
+	    	@Override
+	    	public String getType() {
+	    		return EVENT_Player_Treated_A_Disease;
 	    	}
 	    };
 	    this.eventBus.publish(event);
