@@ -66,4 +66,14 @@ public class InMemoryGameStore implements PlayerRepository {
 	        this.playerHand = playerHand;
 	    }
 	 }
+
+	@Override
+	public void updatePlayerLocationCubes(int playerId, City playerLocation) {
+		PersistencePlayer player = this.gameDb.get(playerId);
+    	if(player != null) {
+    		player.playerLocation = playerLocation;
+    		this.gameDb.put(playerId, player);
+    	}
+		
+	}
 }
