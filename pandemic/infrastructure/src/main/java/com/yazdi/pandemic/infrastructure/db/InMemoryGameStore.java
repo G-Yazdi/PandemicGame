@@ -49,7 +49,7 @@ public class InMemoryGameStore implements PlayerRepository {
 	public void updatePlayerLocationDiseaseStatus(int playerId, Disease disease, boolean hasCure) {
 		PersistencePlayer player = this.gameDb.get(playerId);
     	if(player != null) {
-    		player.playerLocation.getCubesOf(disease).forEach(d -> d.setHasCure(hasCure));
+    		player.playerLocation.getCubes(disease).forEach(c -> c.getDisease().setHasCure(hasCure));
     		this.gameDb.put(playerId, player);
     	}
 		

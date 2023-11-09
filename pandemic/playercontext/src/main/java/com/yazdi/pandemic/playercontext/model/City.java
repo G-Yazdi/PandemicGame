@@ -3,7 +3,7 @@ package com.yazdi.pandemic.playercontext.model;
 public class City 
 {
 	private CustomArrayList<City> neighbours;
-	//private CustomArrayList<InfectionCube> infectionCubes;
+	private CustomArrayList<Cube> cubes;
 	private String name;
 	private boolean hasResearchStation;
 	
@@ -12,7 +12,7 @@ public class City
 		this.setName(name);
 		this.setHasResearchStation(false);
 		this.neighbours = new CustomArrayList<City>();
-		//this.infectionCubes = new CustomArrayList<InfectionCube>();
+		this.cubes = new CustomArrayList<Cube>();
 	}
 	
 	public CustomArrayList<City> getNeighbours() {
@@ -31,20 +31,25 @@ public class City
 		this.name = name;
 	}
 
-	/*
-	 * public CustomArrayList<InfectionCube> getInfectionCubes() { return
-	 * infectionCubes; }
-	 * 
-	 * public void addInfectionCube(InfectionCube infectionCube) {
-	 * this.infectionCubes.add(infectionCube); } public void
-	 * removeInfectionCube(String diseaseName) {
-	 * this.infectionCubes.removeIfCustom(cube->cube.getDisease().getName() ==
-	 * diseaseName); } public void removeAllInfectionCube(String diseaseName) {
-	 * this.infectionCubes.removeAllIfCustom(cube->cube.getDisease().getName() ==
-	 * diseaseName); } public List<InfectionCube> getInfectionCubes(String
-	 * diseaseName){ return this.getInfectionCubes().stream().filter(
-	 * i->i.getDisease().getName() == diseaseName).toList(); }
-	 */
+	public CustomArrayList<Cube> getInfectionCubes() { 
+		return this.cubes; 
+	}
+	public void addCube(Cube cube) {
+	  this.cubes.add(cube); 
+	} 
+	public void removeCube(String diseaseName) {
+	  this.cubes.removeIfCustom(cube->cube.getDisease().getName() ==
+	  diseaseName); 
+	} 
+	public void removeAllInfectionCube(String diseaseName) {
+	  this.cubes.removeAllIfCustom(cube->cube.getDisease().getName() ==
+	  diseaseName); 
+	} 
+	public CustomArrayList<Cube> getCubes(Disease disease){ 
+		return 
+			this.cubes.findElementsIfCustom(cube -> cube.getDisease().getName() == disease.getName());
+	}
+	 
 
 	public Boolean getHasResearchStation() {
 		return hasResearchStation;
