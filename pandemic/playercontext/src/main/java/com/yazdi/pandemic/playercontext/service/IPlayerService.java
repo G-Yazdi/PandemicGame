@@ -14,4 +14,5 @@ public interface IPlayerService extends ApplicationService {
     
 
 	public void setPlayerRepository(PlayerRepository playerRepository);
+	public void treatDisease(Player player, Disease disease);
 }
