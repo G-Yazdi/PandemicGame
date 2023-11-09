@@ -10,6 +10,7 @@ import com.yazdi.pandemic.playercontext.model.Action;
 import com.yazdi.pandemic.playercontext.model.City;
 import com.yazdi.pandemic.playercontext.model.Disease;
 import com.yazdi.pandemic.playercontext.model.ExpertBuildAction;
+import com.yazdi.pandemic.playercontext.model.FindCureAction;
 import com.yazdi.pandemic.playercontext.model.GlobetrotterMoveAction;
 import com.yazdi.pandemic.playercontext.model.MoveAction;
 import com.yazdi.pandemic.playercontext.model.Player;
