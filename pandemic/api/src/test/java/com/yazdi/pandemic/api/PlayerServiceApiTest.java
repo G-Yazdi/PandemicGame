@@ -18,6 +18,7 @@ import com.yazdi.pandemic.playercontext.model.GlobetrotterRole;
 import com.yazdi.pandemic.playercontext.model.Player;
 import com.yazdi.pandemic.playercontext.model.PlayerCard;
 import com.yazdi.pandemic.playercontext.model.Role;
+import com.yazdi.pandemic.playercontext.model.ScientistRole;
 import com.yazdi.pandemic.playercontext.model.Card;
 import com.yazdi.pandemic.playercontext.repository.PlayerRepository;
 import com.yazdi.pandemic.playercontext.service.IPlayerService;

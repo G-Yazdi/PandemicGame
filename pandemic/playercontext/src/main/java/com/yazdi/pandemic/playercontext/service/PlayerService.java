@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.yazdi.pandemic.playercontext.model.Action;
 import com.yazdi.pandemic.playercontext.model.City;
+import com.yazdi.pandemic.playercontext.model.Disease;
 import com.yazdi.pandemic.playercontext.model.ExpertBuildAction;
 import com.yazdi.pandemic.playercontext.model.GlobetrotterMoveAction;
 import com.yazdi.pandemic.playercontext.model.MoveAction;
@@ -19,6 +20,7 @@ import com.yazdi.pandemic.sharedkernel.events.EventBus;
 public class PlayerService implements IPlayerService {
     public static final String EVENT_Player_Moved = "PlayerMovedEvent";
     public static final String EVENT_Player_Built_A_Research_Station = "PlayerBuiltAResearchStationEvent";
+    public static final String EVENT_Player_Found_A_Cure_For_A_Disease = "PlayerFoundACureForADiseaseEvent";
 
     private PlayerRepository playerRepository;
     private EventBus eventBus;
@@ -81,6 +83,32 @@ public class PlayerService implements IPlayerService {
 	    	@Override
 	    	public String getType() {
 	    		return EVENT_Player_Built_A_Research_Station;
+	    	}
+	    };
+	    this.eventBus.publish(event);
+		
+	}
+	@Override
+	public void findCure(Player player, Disease disease) {
+		Action action;
+		
+		if(player.getRole().getType() == ActionType.FindCure) {
+			action = new ScientistFindCureAction(player, disease);
+			action.perform();
+		}
+		else {
+			action = new FindCureAction(player, disease);
+			action.perform();
+		}
+		this.playerRepository.updatePlayerHand(player.getId(), player.getHand());
+		this.playerRepository.updatePlayerLocationDiseaseStatus(player.getId(), disease, true);
+		
+	    Map<String, String> payload = new HashMap<>();
+	    payload.put("player_id", String.valueOf(player.getId()));
+	    ApplicationEvent event = new ApplicationEvent(payload) {
+	    	@Override
+	    	public String getType() {
+	    		return EVENT_Player_Found_A_Cure_For_A_Disease;
 	    	}
 	    };
 	    this.eventBus.publish(event);
