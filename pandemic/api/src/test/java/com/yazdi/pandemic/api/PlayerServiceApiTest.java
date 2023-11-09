@@ -129,6 +129,20 @@ public class PlayerServiceApiTest {
 		
 	}
 	@Test
+	void notEnoughCardsForFindingCureAsScientistExceptionTest() {
+		Role scientist = new ScientistRole();
+		Player player1 = new Player(scientist);
+		City city1 = new City("Mashhad");
+		player1.setCurrentLocation(city1);
+		Disease disease = new Disease("Influenza", false);
+		
+		PlayerServiceApi api = new PlayerServiceApi(playerService);
+	    Throwable exception = assertThrows(RuntimeException.class, 
+	    		() -> api.findCureService(player1, disease));
+	    assertEquals("Illegal find cure request: There is not enough player cards of the same disease in the player's hand!", exception.getMessage());
+	   
+	}
+	@Test
 	public void findCureAsScientistServiceTest(){
 		Role scientist = new ScientistRole();
 		Player player1 = new Player(scientist);
