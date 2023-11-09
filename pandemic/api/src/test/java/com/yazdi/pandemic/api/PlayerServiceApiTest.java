@@ -143,6 +143,24 @@ public class PlayerServiceApiTest {
 	   
 	}
 	@Test
+	void noResearchStationFoundForFindingCureAsScientistExceptionTest() {
+		Role scientist = new ScientistRole();
+		Player player1 = new Player(scientist);
+		City city1 = new City("Mashhad");
+		player1.setCurrentLocation(city1);
+		Disease disease = new Disease("Influenza", false);
+		
+		PlayerServiceApi api = new PlayerServiceApi(playerService);
+		Card playerCard1 = new PlayerCard(player1.getCurrentLocation().getName(), disease.getName());
+		player1.addToHand(playerCard1);
+		player1.addToHand(playerCard1);
+		player1.addToHand(playerCard1);
+		player1.addToHand(playerCard1);
+	    Throwable exception = assertThrows(RuntimeException.class, 
+	    		() -> api.findCureService(player1, disease));
+	    assertEquals("Illegal find cure request: There is no research station in the player's city!", exception.getMessage());
+	}
+	@Test
 	public void findCureAsScientistServiceTest(){
 		Role scientist = new ScientistRole();
 		Player player1 = new Player(scientist);
