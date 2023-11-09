@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import com.yazdi.pandemic.playercontext.model.City;
 import com.yazdi.pandemic.playercontext.model.Cube;
 import com.yazdi.pandemic.playercontext.model.Disease;
+import com.yazdi.pandemic.playercontext.model.DoctorRole;
 import com.yazdi.pandemic.playercontext.model.ExpertRole;
 import com.yazdi.pandemic.playercontext.model.GlobetrotterRole;
 import com.yazdi.pandemic.playercontext.model.Player;
