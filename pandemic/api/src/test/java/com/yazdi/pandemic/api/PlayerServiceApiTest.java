@@ -156,7 +156,7 @@ public class PlayerServiceApiTest {
 	}
 	
 	@Test
-	void notEnoughCardsForFindingCureExceptionTest() {
+	void notEnoughCardsForFindingCureAsNotScientistExceptionTest() {
 		Role role = new GlobetrotterRole();
 		Player player1 = new Player(role);
 		Disease disease = new Disease("Influenza", false);
