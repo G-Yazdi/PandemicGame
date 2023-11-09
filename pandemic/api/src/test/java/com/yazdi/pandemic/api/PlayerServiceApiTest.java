@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ServiceLoader;
 
@@ -37,15 +38,11 @@ public class PlayerServiceApiTest {
         container.put(IPlayerService.class, playerService);
         return container;
     }
-	
-	
-	  @BeforeAll 
-	  public static void init() {
-		  Map<Class<?>, Object> container = createContainer();
-		  playerService = (IPlayerService) container.get(IPlayerService.class);
-	  }
-	 
-	
+	@BeforeAll 
+	public static void init() {
+		Map<Class<?>, Object> container = createContainer();
+		playerService = (IPlayerService) container.get(IPlayerService.class);
+	}
 	@Test
 	public void moveAsGlobetrotterServiceTest() {
 		Role role = new GlobetrotterRole();
@@ -59,23 +56,17 @@ public class PlayerServiceApiTest {
 		assertEquals(player1.getCurrentLocation().getName(), destination.getName());
 		
 	}
-	
-	
-	  @Test 
-	  public void illegalMoveExceptionTest() { 
-		  Role role = new ExpertRole(); 
-		  Player  player1 = new Player(role); 
-		  City city1 = new City("Mashhad");
-		  player1.setCurrentLocation(city1); 
-		  City destination = new City("Zahedan");
-		  
-		  PlayerServiceApi api = new PlayerServiceApi(playerService); 
-		  Throwable exception = assertThrows(RuntimeException.class, () -> api.moveService(player1, destination));
-		  assertEquals("Illegal move request: The player can not move to a non-neighbor city!", exception.getMessage());
+	@Test 
+	public void illegalMoveExceptionTest() {
+		Role role = new ExpertRole(); 
+		Player  player1 = new Player(role); 
+		City city1 = new City("Mashhad");
+		player1.setCurrentLocation(city1); 
+		City destination = new City("Zahedan");  
+		PlayerServiceApi api = new PlayerServiceApi(playerService); 
+		Throwable exception = assertThrows(RuntimeException.class, () -> api.moveService(player1, destination));
+		assertEquals("Illegal move request: The player can not move to a non-neighbor city!", exception.getMessage());
 	  }
-	 
-	 
-	
 	@Test
 	public void moveAsNotGlobetrotterServiceTest() {
 		Role role = new ExpertRole();
@@ -90,7 +81,6 @@ public class PlayerServiceApiTest {
 		assertEquals(player1.getCurrentLocation().getName(), destination.getName());
 		
 	}
-	
 	@Test
 	public void buildAsExpertServiceTest() {
 		Role role = new ExpertRole();
@@ -137,5 +127,31 @@ public class PlayerServiceApiTest {
 	            () -> assertEquals(previousSize - 1, currentSize)); // check if the card is removed from the player's hand
 		
 	}
-
+	@Test
+	public void findCureAsScientistServiceTest(){
+		Role scientist = new ScientistRole();
+		Player player1 = new Player(scientist);
+		City city1 = new City("Mashhad");
+		player1.setCurrentLocation(city1);
+		Disease disease = new Disease("Influenza", false);
+		
+		Card playerCard1 = new PlayerCard(player1.getCurrentLocation().getName(), disease.getName());
+		player1.addToHand(playerCard1);
+		player1.addToHand(playerCard1);
+		player1.addToHand(playerCard1);
+		player1.addToHand(playerCard1);
+		player1.getCurrentLocation().setHasResearchStation(true);
+		
+		int previousSize = player1.getHand().size();
+		
+		PlayerServiceApi api = new PlayerServiceApi(playerService);
+		api.findCureService(player1, disease);
+		
+		int currentSize = player1.getHand().size();
+		assertAll(
+		            () -> assertTrue(disease.getHasCure()),
+		            () -> assertEquals(previousSize - 4, currentSize) //check if 4 cards are removed from the player's hand
+		    );
+	}
+	
 }
