@@ -16,6 +16,7 @@ import com.yazdi.pandemic.playercontext.model.GlobetrotterMoveAction;
 import com.yazdi.pandemic.playercontext.model.MoveAction;
 import com.yazdi.pandemic.playercontext.model.Player;
 import com.yazdi.pandemic.playercontext.model.ScientistFindCureAction;
+import com.yazdi.pandemic.playercontext.model.TreatAction;
 import com.yazdi.pandemic.playercontext.repository.PlayerRepository;
 import com.yazdi.pandemic.sharedkernel.events.ApplicationEvent;
 import com.yazdi.pandemic.sharedkernel.events.EventBus;

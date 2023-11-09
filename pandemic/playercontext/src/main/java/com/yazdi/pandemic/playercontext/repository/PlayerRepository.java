@@ -10,4 +10,5 @@ public interface PlayerRepository {
 	void updatePlayerLocationResearchStationStatus(int playerId, boolean hasResearchStation);
 	void updatePlayerHand(int playerId, CustomArrayList<Card> playerHand);
 	void updatePlayerLocationDiseaseStatus(int playerId, Disease disease, boolean hasCure);
+	void updatePlayerLocationCubes(int playerId, City currentLocation);
 }
