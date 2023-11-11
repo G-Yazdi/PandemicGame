@@ -184,7 +184,10 @@ public class PlayerServiceApiTest {
 		
 		int currentSize = player1.getHand().size();
 		assertAll(
-		            () -> assertTrue(disease.getHasCure()),
+		            () -> {
+						player1.getCurrentLocation().getCubes(disease)
+						.forEach(cube->assertTrue(cube.getDisease().getHasCure()));
+					},
 		            () -> assertEquals(previousSize - 4, currentSize) //check if 4 cards are removed from the player's hand
 		    );
 	}
@@ -245,7 +248,10 @@ public class PlayerServiceApiTest {
 		int currentSize = player1.getHand().size();
 		
 		assertAll(
-				() -> assertTrue(disease.getHasCure()),
+				() -> {
+					player1.getCurrentLocation().getCubes(disease)
+					.forEach(cube->assertTrue(cube.getDisease().getHasCure()));
+				},
 		        () -> assertEquals(previousSize - 5, currentSize) //check if 5 cards are removed from the player's hand
 		    );
 	}

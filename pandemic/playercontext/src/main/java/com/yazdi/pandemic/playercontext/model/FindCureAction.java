@@ -14,7 +14,7 @@ public class FindCureAction extends Action {
 	@Override
 	public void perform() {
 		validate();
-		disease.setHasCure(true);
+		player.getCurrentLocation().getCubes(disease).forEach(c->c.getDisease().setHasCure(true));
 		player.getHand().removeNElementsIfCustom(c-> ((PlayerCard) c).getDiseaseName() == disease.getName(), 5);
 			
 	}

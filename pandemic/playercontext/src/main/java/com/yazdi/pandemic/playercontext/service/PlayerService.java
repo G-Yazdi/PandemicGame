@@ -80,7 +80,7 @@ public class PlayerService implements IPlayerService {
 			action = new BuildAction(player);
 			action.perform();
 		}
-		this.playerRepository.updatePlayerLocationResearchStationStatus(player.getId(), true);
+		this.playerRepository.updatePlayerLocation(player.getId(), player.getCurrentLocation());
 		
 	    Map<String, String> payload = new HashMap<>();
 	    payload.put("player_id", String.valueOf(player.getId()));
@@ -106,7 +106,7 @@ public class PlayerService implements IPlayerService {
 			action.perform();
 		}
 		this.playerRepository.updatePlayerHand(player.getId(), player.getHand());
-		this.playerRepository.updatePlayerLocationDiseaseStatus(player.getId(), disease, true);
+		this.playerRepository.updatePlayerLocation(player.getId(), player.getCurrentLocation());
 		
 	    Map<String, String> payload = new HashMap<>();
 	    payload.put("player_id", String.valueOf(player.getId()));
@@ -131,7 +131,7 @@ public class PlayerService implements IPlayerService {
 			action = new TreatAction(player, disease);
 			action.perform();
 		}
-		this.playerRepository.updatePlayerLocationCubes(player.getId(), player.getCurrentLocation());
+		this.playerRepository.updatePlayerLocation(player.getId(), player.getCurrentLocation());
 		
 	    Map<String, String> payload = new HashMap<>();
 	    payload.put("player_id", String.valueOf(player.getId()));

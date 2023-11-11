@@ -14,10 +14,10 @@ public class InMemoryGameStore implements PlayerRepository {
     private volatile static InMemoryGameStore instance = new InMemoryGameStore();
 
     @Override
-    public void updatePlayerLocation(int playerId, City newCity){
+    public void updatePlayerLocation(int playerId, City playerLocation){
     	PersistencePlayer player = this.gameDb.get(playerId);
     	if(player != null) {
-    		player.playerLocation = newCity;
+    		player.playerLocation = playerLocation;
     		this.gameDb.put(playerId, player);
     	}
     }
@@ -27,29 +27,10 @@ public class InMemoryGameStore implements PlayerRepository {
     }
 
 	@Override
-	public void updatePlayerLocationResearchStationStatus(int playerId, boolean hasResearchStation) {
-		PersistencePlayer player = this.gameDb.get(playerId);
-    	if(player != null) {
-    		player.playerLocation.setHasResearchStation(hasResearchStation);
-    		this.gameDb.put(playerId, player);
-    	}
-	}
-
-	@Override
 	public void updatePlayerHand(int playerId, CustomArrayList<Card> playerHand) {
 		PersistencePlayer player = this.gameDb.get(playerId);
     	if(player != null) {
     		player.playerHand = playerHand;
-    		this.gameDb.put(playerId, player);
-    	}
-		
-	}
-
-	@Override
-	public void updatePlayerLocationDiseaseStatus(int playerId, Disease disease, boolean hasCure) {
-		PersistencePlayer player = this.gameDb.get(playerId);
-    	if(player != null) {
-    		player.playerLocation.getCubes(disease).forEach(c -> c.getDisease().setHasCure(hasCure));
     		this.gameDb.put(playerId, player);
     	}
 		
@@ -66,14 +47,4 @@ public class InMemoryGameStore implements PlayerRepository {
 	        this.playerHand = playerHand;
 	    }
 	 }
-
-	@Override
-	public void updatePlayerLocationCubes(int playerId, City playerLocation) {
-		PersistencePlayer player = this.gameDb.get(playerId);
-    	if(player != null) {
-    		player.playerLocation = playerLocation;
-    		this.gameDb.put(playerId, player);
-    	}
-		
-	}
 }
