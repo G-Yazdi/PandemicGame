@@ -294,5 +294,26 @@ public class PlayerServiceApiTest {
 		
 		assertEquals(previousSize - 1, currentSize); 
 	}
+	@Test
+	public void treatDiseaseWithRemedyAsNotDoctorServiceTest(){
+		
+		Role role = new ScientistRole();
+		Player player1 = new Player(role);
+		City city1 = new City("Mashhad");
+		player1.setCurrentLocation(city1);
+		Disease disease = new Disease("Influenza", true);
+		city1.addCube(new Cube(disease));
+		city1.addCube(new Cube(disease));
+		
+		
+		PlayerServiceApi api = new PlayerServiceApi(playerService);
+		api.treatDiseaseService(player1, disease);
+		
+		List<Cube> cubesOfDisease = city1.getCubes(disease);// In this case, all the cubes of the disease should be removed from the city1
+		int currentSize = cubesOfDisease.size();
+		
+		assertEquals(0, currentSize);	
+	}
+	
 	
 }

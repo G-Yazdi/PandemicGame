@@ -7,7 +7,7 @@ public class Disease {
 	
 	public Disease(String name, boolean hasCure) {
 		this.setName(name);
-		this.setHasCure(false);
+		this.setHasCure(hasCure);
 	}
 	
 	public String getName() {
