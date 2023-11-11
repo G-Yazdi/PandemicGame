@@ -1,6 +1,6 @@
 package com.yazdi.pandemic.playercontext.model.entities;
 
-import com.yazdi.pandemic.playercontext.model.utils.CustomArrayList;
+import com.yazdi.pandemic.playercontext.utils.CustomArrayList;
 
 public class PlayerLocation 
 {

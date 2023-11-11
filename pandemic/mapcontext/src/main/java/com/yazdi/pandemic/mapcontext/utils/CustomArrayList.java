@@ -1,4 +1,4 @@
-package com.yazdi.pandemic.playercontext.model.utils;
+package com.yazdi.pandemic.mapcontext.utils;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -65,3 +65,4 @@ public class CustomArrayList<E> extends ArrayList<E> {
 		
 	}
 }
+
