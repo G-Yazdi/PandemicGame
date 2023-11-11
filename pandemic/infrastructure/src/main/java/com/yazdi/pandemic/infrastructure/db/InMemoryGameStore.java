@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.yazdi.pandemic.playercontext.model.contracts.Card;
-import com.yazdi.pandemic.playercontext.model.entities.City;
+import com.yazdi.pandemic.playercontext.model.entities.PlayerLocation;
 import com.yazdi.pandemic.playercontext.model.entities.Disease;
 import com.yazdi.pandemic.playercontext.model.utils.CustomArrayList;
 import com.yazdi.pandemic.playercontext.repository.PlayerRepository;
@@ -14,7 +14,7 @@ public class InMemoryGameStore implements PlayerRepository {
     private volatile static InMemoryGameStore instance = new InMemoryGameStore();
 
     @Override
-    public void updatePlayerLocation(int playerId, City playerLocation){
+    public void updatePlayerLocation(int playerId, PlayerLocation playerLocation){
     	PersistencePlayer player = this.gameDb.get(playerId);
     	if(player != null) {
     		player.playerLocation = playerLocation;
@@ -38,10 +38,10 @@ public class InMemoryGameStore implements PlayerRepository {
 	
 	public static class PersistencePlayer {
 		public int playerId;
-	    public City playerLocation;
+	    public PlayerLocation playerLocation;
 	    public CustomArrayList<Card> playerHand;
 
-	    public PersistencePlayer(int playerId, City playerLocation, CustomArrayList<Card> playerHand) {
+	    public PersistencePlayer(int playerId, PlayerLocation playerLocation, CustomArrayList<Card> playerHand) {
 	    	this.playerId = playerId;
 	        this.playerLocation = playerLocation;
 	        this.playerHand = playerHand;

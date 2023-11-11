@@ -8,7 +8,7 @@ import com.yazdi.pandemic.playercontext.model.utils.CustomArrayList;
 
 public class Player {
 		
-		private City currentLocation;
+		private PlayerLocation currentLocation;
 		private CustomArrayList<Card> hand;
 		private Role role;
 		private int id;
@@ -24,11 +24,11 @@ public class Player {
 			id = uniqueId.getAndIncrement();
 		}
 
-		public City getCurrentLocation() {
+		public PlayerLocation getCurrentLocation() {
 			return currentLocation;
 		}
 
-		public void setCurrentLocation(City currentLocation) {
+		public void setCurrentLocation(PlayerLocation currentLocation) {
 			this.currentLocation = currentLocation;
 		}
 

@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import com.yazdi.pandemic.playercontext.model.contracts.Card;
 import com.yazdi.pandemic.playercontext.model.contracts.Role;
-import com.yazdi.pandemic.playercontext.model.entities.City;
+import com.yazdi.pandemic.playercontext.model.entities.PlayerLocation;
 import com.yazdi.pandemic.playercontext.model.entities.Cube;
 import com.yazdi.pandemic.playercontext.model.entities.Disease;
 import com.yazdi.pandemic.playercontext.model.entities.DoctorRole;
@@ -50,9 +50,9 @@ public class PlayerServiceApiTest {
 	public void moveAsGlobetrotterServiceTest() {
 		Role role = new GlobetrotterRole();
 		Player player1 = new Player(role);
-		City city = new City("Mashhad");
+		PlayerLocation city = new PlayerLocation("Mashhad");
 		player1.setCurrentLocation(city);
-		City destination = new City("Zahedan");
+		PlayerLocation destination = new PlayerLocation("Zahedan");
 		city.addNeighbour(destination);
 		PlayerServiceApi api = new PlayerServiceApi(playerService);
 		api.moveService(player1, destination);
@@ -63,9 +63,9 @@ public class PlayerServiceApiTest {
 	public void illegalMoveExceptionTest() {
 		Role role = new ExpertRole(); 
 		Player  player1 = new Player(role); 
-		City city1 = new City("Mashhad");
+		PlayerLocation city1 = new PlayerLocation("Mashhad");
 		player1.setCurrentLocation(city1); 
-		City destination = new City("Zahedan");  
+		PlayerLocation destination = new PlayerLocation("Zahedan");  
 		PlayerServiceApi api = new PlayerServiceApi(playerService); 
 		Throwable exception = assertThrows(RuntimeException.class, () -> api.moveService(player1, destination));
 		assertEquals("Illegal move request: The player can not move to a non-neighbor city!", exception.getMessage());
@@ -74,9 +74,9 @@ public class PlayerServiceApiTest {
 	public void moveAsNotGlobetrotterServiceTest() {
 		Role role = new ExpertRole();
 		Player player1 = new Player(role);
-		City city1 = new City("Mashhad");
+		PlayerLocation city1 = new PlayerLocation("Mashhad");
 		player1.setCurrentLocation(city1);
-		City destination = new City("Zahedan");
+		PlayerLocation destination = new PlayerLocation("Zahedan");
 		city1.addNeighbour(destination);
 		
 		PlayerServiceApi api = new PlayerServiceApi(playerService);
@@ -88,7 +88,7 @@ public class PlayerServiceApiTest {
 	public void buildAsExpertServiceTest() {
 		Role role = new ExpertRole();
 		Player player1 = new Player(role);
-		City city = new City("Mashhad");
+		PlayerLocation city = new PlayerLocation("Mashhad");
 		player1.setCurrentLocation(city);
 		
 		PlayerServiceApi api = new PlayerServiceApi(playerService);
@@ -99,7 +99,7 @@ public class PlayerServiceApiTest {
 	void illegalBuildExceptionTest() {
 		Role role = new GlobetrotterRole();
 		Player player1 = new Player(role);
-		City city = new City("Mashhad");
+		PlayerLocation city = new PlayerLocation("Mashhad");
 		player1.setCurrentLocation(city);
 		
 		PlayerServiceApi api = new PlayerServiceApi(playerService);
@@ -111,7 +111,7 @@ public class PlayerServiceApiTest {
 	public void buildAsNotExpertServiceTest() {
 		Role role = new GlobetrotterRole();
 		Player player1 = new Player(role);
-		City city1 = new City("Mashhad");
+		PlayerLocation city1 = new PlayerLocation("Mashhad");
 		player1.setCurrentLocation(city1);
 		
 		Disease disease = new Disease("Influenza", false);
@@ -134,7 +134,7 @@ public class PlayerServiceApiTest {
 	void notEnoughCardsForFindingCureAsScientistExceptionTest() {
 		Role scientist = new ScientistRole();
 		Player player1 = new Player(scientist);
-		City city1 = new City("Mashhad");
+		PlayerLocation city1 = new PlayerLocation("Mashhad");
 		player1.setCurrentLocation(city1);
 		Disease disease = new Disease("Influenza", false);
 		
@@ -148,7 +148,7 @@ public class PlayerServiceApiTest {
 	void noResearchStationFoundForFindingCureAsScientistExceptionTest() {
 		Role scientist = new ScientistRole();
 		Player player1 = new Player(scientist);
-		City city1 = new City("Mashhad");
+		PlayerLocation city1 = new PlayerLocation("Mashhad");
 		player1.setCurrentLocation(city1);
 		Disease disease = new Disease("Influenza", false);
 		
@@ -166,7 +166,7 @@ public class PlayerServiceApiTest {
 	public void findCureAsScientistServiceTest(){
 		Role scientist = new ScientistRole();
 		Player player1 = new Player(scientist);
-		City city1 = new City("Mashhad");
+		PlayerLocation city1 = new PlayerLocation("Mashhad");
 		player1.setCurrentLocation(city1);
 		Disease disease = new Disease("Influenza", false);
 		
@@ -208,7 +208,7 @@ public class PlayerServiceApiTest {
 	void noResearchStationFoundForFindingCureAsNotScientistExceptionTest() {
 		Role role = new GlobetrotterRole();
 		Player player1 = new Player(role);
-		City city1 = new City("Mashhad");
+		PlayerLocation city1 = new PlayerLocation("Mashhad");
 		player1.setCurrentLocation(city1);
 		Disease disease = new Disease("Influenza", false);
 		
@@ -228,7 +228,7 @@ public class PlayerServiceApiTest {
 	public void findCureAsNotScientistServiceTest(){
 		Role role = new GlobetrotterRole();
 		Player player1 = new Player(role);
-		City city1 = new City("Mashhad");
+		PlayerLocation city1 = new PlayerLocation("Mashhad");
 		player1.setCurrentLocation(city1);
 		Disease disease = new Disease("Influenza", false);
 		
@@ -259,7 +259,7 @@ public class PlayerServiceApiTest {
 	public void treatDiseaseAsDoctorServiceTest(){
 		Role role = new DoctorRole();
 		Player player1 = new Player(role);
-		City city1 = new City("Mashhad");
+		PlayerLocation city1 = new PlayerLocation("Mashhad");
 		player1.setCurrentLocation(city1);
 		Disease disease = new Disease("Influenza", false);
 		city1.addCube(new Cube(disease));
@@ -277,7 +277,7 @@ public class PlayerServiceApiTest {
 	public void treatDiseaseAsNotDoctorWithNoRemedyServiceTest(){
 		Role role = new ScientistRole();
 		Player player1 = new Player(role);
-		City city1 = new City("Mashhad");
+		PlayerLocation city1 = new PlayerLocation("Mashhad");
 		player1.setCurrentLocation(city1);
 		Disease disease = new Disease("Influenza", false);
 		city1.addCube(new Cube(disease));
@@ -299,7 +299,7 @@ public class PlayerServiceApiTest {
 		
 		Role role = new ScientistRole();
 		Player player1 = new Player(role);
-		City city1 = new City("Mashhad");
+		PlayerLocation city1 = new PlayerLocation("Mashhad");
 		player1.setCurrentLocation(city1);
 		Disease disease = new Disease("Influenza", true);
 		city1.addCube(new Cube(disease));

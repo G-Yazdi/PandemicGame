@@ -2,26 +2,26 @@ package com.yazdi.pandemic.playercontext.model.entities;
 
 import com.yazdi.pandemic.playercontext.model.utils.CustomArrayList;
 
-public class City 
+public class PlayerLocation 
 {
-	private CustomArrayList<City> neighbours;
+	private CustomArrayList<PlayerLocation> neighbours;
 	private CustomArrayList<Cube> cubes;
 	private String name;
 	private boolean hasResearchStation;
 	
-	public City(String name) {
+	public PlayerLocation(String name) {
 		
 		this.setName(name);
 		this.setHasResearchStation(false);
-		this.neighbours = new CustomArrayList<City>();
+		this.neighbours = new CustomArrayList<PlayerLocation>();
 		this.cubes = new CustomArrayList<Cube>();
 	}
 	
-	public CustomArrayList<City> getNeighbours() {
+	public CustomArrayList<PlayerLocation> getNeighbours() {
 		return this.neighbours;
 	}
 	
-	public void addNeighbour(City city) {
+	public void addNeighbour(PlayerLocation city) {
 		this.neighbours.add(city);
 	}
 

@@ -1,6 +1,6 @@
 package com.yazdi.pandemic.api;
 
-import com.yazdi.pandemic.playercontext.model.entities.City;
+import com.yazdi.pandemic.playercontext.model.entities.PlayerLocation;
 import com.yazdi.pandemic.playercontext.model.entities.Disease;
 import com.yazdi.pandemic.playercontext.model.entities.Player;
 import com.yazdi.pandemic.playercontext.service.IPlayerService;
@@ -13,7 +13,7 @@ public class PlayerServiceApi {
 		this.playerService = playerService;
 	}
 	
-	public void moveService(Player player, City destination) {
+	public void moveService(Player player, PlayerLocation destination) {
 		 playerService.movePlayer(player, destination);
 	}
 	public void buildService(Player player) {

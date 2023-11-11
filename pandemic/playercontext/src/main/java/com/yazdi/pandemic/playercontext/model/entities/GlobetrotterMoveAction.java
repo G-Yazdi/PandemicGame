@@ -6,9 +6,9 @@ import com.yazdi.pandemic.playercontext.model.enums.ActionType;
 public class GlobetrotterMoveAction extends Action{
 	
 	private Player player;
-	private City destination;
+	private PlayerLocation destination;
 
-	public GlobetrotterMoveAction(Player player, City destination) {
+	public GlobetrotterMoveAction(Player player, PlayerLocation destination) {
 		super(ActionType.Move);
 		this.player = player;
 		this.destination = destination;

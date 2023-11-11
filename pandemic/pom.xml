@@ -35,5 +35,6 @@
 		<module>sharedkernel</module>
 		<module>infrastructure</module>
 		<module>api</module>
+		<module>mapcontext</module>
 	</modules>
 </project>

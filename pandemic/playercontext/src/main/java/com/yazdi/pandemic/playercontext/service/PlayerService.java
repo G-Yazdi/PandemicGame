@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.yazdi.pandemic.playercontext.model.contracts.Action;
 import com.yazdi.pandemic.playercontext.model.entities.BuildAction;
-import com.yazdi.pandemic.playercontext.model.entities.City;
+import com.yazdi.pandemic.playercontext.model.entities.PlayerLocation;
 import com.yazdi.pandemic.playercontext.model.entities.Disease;
 import com.yazdi.pandemic.playercontext.model.entities.DoctorTreatAction;
 import com.yazdi.pandemic.playercontext.model.entities.ExpertBuildAction;
@@ -44,7 +44,7 @@ public class PlayerService implements IPlayerService {
     }
 
 	@Override
-	public void movePlayer(Player player, City destination) {
+	public void movePlayer(Player player, PlayerLocation destination) {
 		Action action;
 		if(player.getRole().getType() == ActionType.Move) {
 			action = new GlobetrotterMoveAction(player, destination);

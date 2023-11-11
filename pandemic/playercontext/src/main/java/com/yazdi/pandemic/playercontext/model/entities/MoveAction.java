@@ -5,10 +5,10 @@ import com.yazdi.pandemic.playercontext.model.enums.ActionType;
 
 public class MoveAction extends Action {
 	
-	private City destination;
+	private PlayerLocation destination;
 	private Player player;
 	
-	public MoveAction(Player player, City destination) {
+	public MoveAction(Player player, PlayerLocation destination) {
 		super(ActionType.Move);
 		this.player = player;
 		this.destination = destination;
