@@ -10,7 +10,7 @@ private IMapService mapService;
 		this.mapService = mapService;
 	}
 	
-	public void updateMapServiceTest(City updatedCity) {
+	public void updateMapService(City updatedCity) {
 		mapService.updateMap(updatedCity);
 	}
 
