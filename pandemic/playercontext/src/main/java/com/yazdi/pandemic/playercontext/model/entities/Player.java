@@ -1,6 +1,10 @@
-package com.yazdi.pandemic.playercontext.model;
+package com.yazdi.pandemic.playercontext.model.entities;
 
 import java.util.concurrent.atomic.AtomicInteger;
+
+import com.yazdi.pandemic.playercontext.model.contracts.Card;
+import com.yazdi.pandemic.playercontext.model.contracts.Role;
+import com.yazdi.pandemic.playercontext.model.utils.CustomArrayList;
 
 public class Player {
 		

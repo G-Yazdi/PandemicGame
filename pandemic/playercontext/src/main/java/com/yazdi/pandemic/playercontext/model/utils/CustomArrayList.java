@@ -1,4 +1,4 @@
-package com.yazdi.pandemic.playercontext.model;
+package com.yazdi.pandemic.playercontext.model.utils;
 
 import java.util.ArrayList;
 import java.util.Iterator;

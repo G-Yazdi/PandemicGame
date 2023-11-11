@@ -1,8 +1,8 @@
 package com.yazdi.pandemic.api;
 
-import com.yazdi.pandemic.playercontext.model.City;
-import com.yazdi.pandemic.playercontext.model.Disease;
-import com.yazdi.pandemic.playercontext.model.Player;
+import com.yazdi.pandemic.playercontext.model.entities.City;
+import com.yazdi.pandemic.playercontext.model.entities.Disease;
+import com.yazdi.pandemic.playercontext.model.entities.Player;
 import com.yazdi.pandemic.playercontext.service.IPlayerService;
 
 public class PlayerServiceApi {

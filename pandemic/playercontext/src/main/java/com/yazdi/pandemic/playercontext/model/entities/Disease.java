@@ -1,4 +1,4 @@
-package com.yazdi.pandemic.playercontext.model;
+package com.yazdi.pandemic.playercontext.model.entities;
 
 public class Disease {
 	

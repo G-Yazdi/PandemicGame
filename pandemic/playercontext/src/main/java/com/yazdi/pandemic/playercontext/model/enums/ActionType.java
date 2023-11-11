@@ -1,4 +1,4 @@
-package com.yazdi.pandemic.playercontext.model;
+package com.yazdi.pandemic.playercontext.model.enums;
 
 public enum ActionType {
 	Move,

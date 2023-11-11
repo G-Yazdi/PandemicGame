@@ -1,22 +1,21 @@
 package com.yazdi.pandemic.playercontext.service;
 
-import com.yazdi.pandemic.playercontext.model.ActionType;
-import com.yazdi.pandemic.playercontext.model.BuildAction;
-
 import java.util.HashMap;
 import java.util.Map;
 
-import com.yazdi.pandemic.playercontext.model.Action;
-import com.yazdi.pandemic.playercontext.model.City;
-import com.yazdi.pandemic.playercontext.model.Disease;
-import com.yazdi.pandemic.playercontext.model.DoctorTreatAction;
-import com.yazdi.pandemic.playercontext.model.ExpertBuildAction;
-import com.yazdi.pandemic.playercontext.model.FindCureAction;
-import com.yazdi.pandemic.playercontext.model.GlobetrotterMoveAction;
-import com.yazdi.pandemic.playercontext.model.MoveAction;
-import com.yazdi.pandemic.playercontext.model.Player;
-import com.yazdi.pandemic.playercontext.model.ScientistFindCureAction;
-import com.yazdi.pandemic.playercontext.model.TreatAction;
+import com.yazdi.pandemic.playercontext.model.contracts.Action;
+import com.yazdi.pandemic.playercontext.model.entities.BuildAction;
+import com.yazdi.pandemic.playercontext.model.entities.City;
+import com.yazdi.pandemic.playercontext.model.entities.Disease;
+import com.yazdi.pandemic.playercontext.model.entities.DoctorTreatAction;
+import com.yazdi.pandemic.playercontext.model.entities.ExpertBuildAction;
+import com.yazdi.pandemic.playercontext.model.entities.FindCureAction;
+import com.yazdi.pandemic.playercontext.model.entities.GlobetrotterMoveAction;
+import com.yazdi.pandemic.playercontext.model.entities.MoveAction;
+import com.yazdi.pandemic.playercontext.model.entities.Player;
+import com.yazdi.pandemic.playercontext.model.entities.ScientistFindCureAction;
+import com.yazdi.pandemic.playercontext.model.entities.TreatAction;
+import com.yazdi.pandemic.playercontext.model.enums.ActionType;
 import com.yazdi.pandemic.playercontext.repository.PlayerRepository;
 import com.yazdi.pandemic.sharedkernel.events.ApplicationEvent;
 import com.yazdi.pandemic.sharedkernel.events.EventBus;

@@ -1,4 +1,6 @@
-package com.yazdi.pandemic.playercontext.model;
+package com.yazdi.pandemic.playercontext.model.contracts;
+
+import com.yazdi.pandemic.playercontext.model.enums.ActionType;
 
 public abstract class Role {
 	

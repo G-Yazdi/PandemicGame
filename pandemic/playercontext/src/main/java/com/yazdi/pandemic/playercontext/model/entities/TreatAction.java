@@ -1,4 +1,7 @@
-package com.yazdi.pandemic.playercontext.model;
+package com.yazdi.pandemic.playercontext.model.entities;
+
+import com.yazdi.pandemic.playercontext.model.contracts.Action;
+import com.yazdi.pandemic.playercontext.model.enums.ActionType;
 
 public class TreatAction extends Action {
 	

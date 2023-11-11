@@ -1,4 +1,6 @@
-package com.yazdi.pandemic.playercontext.model;
+package com.yazdi.pandemic.playercontext.model.entities;
+
+import com.yazdi.pandemic.playercontext.model.contracts.Card;
 
 public class PlayerCard implements Card{
 	
