@@ -6,7 +6,7 @@ import com.yazdi.pandemic.playercontext.model.entities.Player;
 import com.yazdi.pandemic.playercontext.service.IPlayerService;
 
 public class PlayerServiceApi {
-private IPlayerService playerService;
+	private IPlayerService playerService;
 	
 	
 	public PlayerServiceApi(IPlayerService playerService) {
