@@ -273,5 +273,26 @@ public class PlayerServiceApiTest {
 		
 		assertEquals(0, currentSize);	
 	}
+	@Test
+	public void treatDiseaseAsNotDoctorWithNoRemedyServiceTest(){
+		Role role = new ScientistRole();
+		Player player1 = new Player(role);
+		City city1 = new City("Mashhad");
+		player1.setCurrentLocation(city1);
+		Disease disease = new Disease("Influenza", false);
+		city1.addCube(new Cube(disease));
+		city1.addCube(new Cube(disease));
+		
+		List<Cube> cubesOfDisease = city1.getCubes(disease);
+		int previousSize = cubesOfDisease.size();
+		
+		PlayerServiceApi api = new PlayerServiceApi(playerService);
+		api.treatDiseaseService(player1, disease);
+		
+		cubesOfDisease = city1.getCubes(disease);
+		int currentSize = cubesOfDisease.size();
+		
+		assertEquals(previousSize - 1, currentSize); 
+	}
 	
 }
