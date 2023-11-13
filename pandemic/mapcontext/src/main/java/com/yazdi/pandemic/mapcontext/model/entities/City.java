@@ -1,8 +1,9 @@
 package com.yazdi.pandemic.mapcontext.model.entities;
 
-import com.yazdi.pandemic.mapcontext.utils.CustomArrayList;
+import com.yazdi.pandemic.sharedkernel.contracts.ICity;
+import com.yazdi.pandemic.sharedkernel.utils.CustomArrayList;
 
-public class City {
+public class City implements ICity {
 	private String name;
 	private CustomArrayList<City> neighbours;
 	private boolean hasResearchStation;

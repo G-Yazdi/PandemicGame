@@ -1,5 +1,7 @@
 package com.yazdi.pandemic.mapcontext.model.entities;
 
+import com.yazdi.pandemic.sharedkernel.contracts.ICity;
+import com.yazdi.pandemic.sharedkernel.utils.CustomArrayList;
 
 public class WorldMap {
 	

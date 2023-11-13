@@ -5,5 +5,4 @@ module com.yazdi.pandemic.mapcontext {
 	requires com.yazdi.pandemic.sharedkernel;
 	provides com.yazdi.pandemic.mapcontext.service.IMapService
     with com.yazdi.pandemic.mapcontext.service.MapService;
-    
 }
