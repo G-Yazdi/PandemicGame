@@ -1,6 +1,7 @@
 package com.yazdi.pandemic.api;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,12 +10,8 @@ import java.util.ServiceLoader;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.yazdi.pandemic.playercontext.model.contracts.Role;
-import com.yazdi.pandemic.playercontext.model.entities.PlayerLocation;
-import com.yazdi.pandemic.playercontext.model.entities.GlobetrotterRole;
-import com.yazdi.pandemic.playercontext.model.entities.Player;
-import com.yazdi.pandemic.playercontext.repository.PlayerRepository;
-import com.yazdi.pandemic.playercontext.service.IPlayerService;
+import com.yazdi.pandemic.mapcontext.repository.MapRepository;
+import com.yazdi.pandemic.mapcontext.service.IMapService;
 import com.yazdi.pandemic.sharedkernel.events.EventBus;
 
 public class MapServiceApiTest {
@@ -31,19 +28,30 @@ public class MapServiceApiTest {
         container.put(IMapService.class, mapService);
         return container;
     }
-	@BeforeAll 
-	public static void init() {
-		Map<Class<?>, Object> container = createContainer();
-		mapService = (IMapService) container.get(IMapService.class);
-	}
 	
-	@Test
-	public void updateMapServiceTest() {
-		
-		MapServiceApi api = new MapServiceApi(mapService);
-		api.updateMapService(updatedCity);
-		assertEquals(map.getCity(updatedCity), updatedCity);
-		
-	}
+	  @BeforeAll 
+	  public static void init() {
+		  Map<Class<?>, Object> container = createContainer();
+		  mapService = (IMapService) container.get(IMapService.class);
+	  }
+	  
+	  @Test 
+	  public void updatePlayerLocationInMapServiceTest() {
+		  MapServiceApi api = new MapServiceApi(mapService); 
+		  WorldMap map = new WorldMap();
+		  City prevLocation = new City("Zahedan");
+		  City newLocation = new City("Mashhad");
+		  map.addCity(prevLocation);
+		  map.addCity(newLocation);
+		  
+		  int playerId = 1;
+		  prevLocation.addPlayer(playerId);
+		  api.updatePlayerLocationInMap(playerId, newLocation, map);
+		  
+		  assertAll(
+		            () -> assertTrue(!((City) map.getCity(prevLocation.getId())).getPlayers().contains(playerId)),
+		            () -> assertTrue(((City) map.getCity(newLocation.getId())).getPlayers().contains(playerId)));
+	  }
+	 
 
 }
