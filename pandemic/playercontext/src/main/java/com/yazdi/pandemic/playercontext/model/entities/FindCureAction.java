@@ -3,7 +3,7 @@ package com.yazdi.pandemic.playercontext.model.entities;
 import com.yazdi.pandemic.playercontext.model.contracts.Action;
 import com.yazdi.pandemic.playercontext.model.contracts.Card;
 import com.yazdi.pandemic.playercontext.model.enums.ActionType;
-import com.yazdi.pandemic.playercontext.utils.CustomArrayList;
+import com.yazdi.pandemic.sharedkernel.utils.CustomArrayList;
 
 public class FindCureAction extends Action {
 	
