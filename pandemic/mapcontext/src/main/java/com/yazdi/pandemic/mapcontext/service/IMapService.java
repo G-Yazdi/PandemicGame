@@ -2,10 +2,12 @@ package com.yazdi.pandemic.mapcontext.service;
 
 import com.yazdi.pandemic.mapcontext.model.entities.City;
 import com.yazdi.pandemic.mapcontext.repository.MapRepository;
+import com.yazdi.pandemic.sharedkernel.service.ApplicationService;
 
-public interface IMapService {
+public interface IMapService extends ApplicationService {
 	
-	public void setMapRepository(MapRepository mapRepository);
-	public void updateMap(City updatedCity);
+	void setMapRepository(MapRepository mapRepository);
+	void updatePlayerLocationInMap(int playerId, City newLocation, WorldMap map);
+	
 
 }
