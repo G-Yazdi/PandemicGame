@@ -10,6 +10,8 @@ import java.util.ServiceLoader;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import com.yazdi.pandemic.mapcontext.model.entities.City;
+import com.yazdi.pandemic.mapcontext.model.entities.WorldMap;
 import com.yazdi.pandemic.mapcontext.repository.MapRepository;
 import com.yazdi.pandemic.mapcontext.service.IMapService;
 import com.yazdi.pandemic.sharedkernel.events.EventBus;
