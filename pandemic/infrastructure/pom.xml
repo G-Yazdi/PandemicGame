@@ -15,6 +15,11 @@
   	</dependency>
   	<dependency>
   		<groupId>com.yazdi</groupId>
+  		<artifactId>mapcontext</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.yazdi</groupId>
   		<artifactId>sharedkernel</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
