@@ -3,12 +3,13 @@ package com.yazdi.pandemic.infrastructure.db;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.yazdi.pandemic.mapcontext.repository.MapRepository;
 import com.yazdi.pandemic.playercontext.model.contracts.Card;
 import com.yazdi.pandemic.playercontext.model.entities.PlayerLocation;
 import com.yazdi.pandemic.playercontext.repository.PlayerRepository;
 import com.yazdi.pandemic.sharedkernel.utils.CustomArrayList;
 
-public class InMemoryGameStore implements PlayerRepository {
+public class InMemoryGameStore implements PlayerRepository, MapRepository {
     private Map<Integer, PersistencePlayer> gameDb = new HashMap<>();
     private volatile static InMemoryGameStore instance = new InMemoryGameStore();
 
