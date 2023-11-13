@@ -8,6 +8,7 @@ import com.yazdi.pandemic.sharedkernel.events.EventBus;
 public class MapService implements IMapService {
 	
 	private MapRepository mapRepository;
+	private EventBus eventBus;
 	
 	@Override
     public void setMapRepository(MapRepository mapRepository) {
@@ -16,13 +17,12 @@ public class MapService implements IMapService {
 
 	@Override
 	public EventBus getEventBus() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.eventBus;
 	}
 
 	@Override
 	public void setEventBus(EventBus eventBus) {
-		// TODO Auto-generated method stub
+		this.eventBus = eventBus;
 		
 	}
 
