@@ -5,9 +5,8 @@ import java.util.Map;
 
 import com.yazdi.pandemic.playercontext.model.contracts.Card;
 import com.yazdi.pandemic.playercontext.model.entities.PlayerLocation;
-import com.yazdi.pandemic.playercontext.model.entities.Disease;
 import com.yazdi.pandemic.playercontext.repository.PlayerRepository;
-import com.yazdi.pandemic.playercontext.utils.CustomArrayList;
+import com.yazdi.pandemic.sharedkernel.utils.CustomArrayList;
 
 public class InMemoryGameStore implements PlayerRepository {
     private Map<Integer, PersistencePlayer> gameDb = new HashMap<>();
