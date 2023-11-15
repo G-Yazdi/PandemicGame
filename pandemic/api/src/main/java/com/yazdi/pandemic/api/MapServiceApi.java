@@ -16,5 +16,9 @@ private IMapService mapService;
 		
 		mapService.updatePlayerLocationInMap(playerId, newLocation, map);
 	}
+	public void listenToPlayerEventServiceTest() {
+		
+		mapService.listenToPlayerEventService();
+	}
 
 }
