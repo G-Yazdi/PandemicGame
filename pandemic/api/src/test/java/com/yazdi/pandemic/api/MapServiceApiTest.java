@@ -14,6 +14,7 @@ import com.yazdi.pandemic.mapcontext.model.entities.City;
 import com.yazdi.pandemic.mapcontext.model.entities.WorldMap;
 import com.yazdi.pandemic.mapcontext.repository.MapRepository;
 import com.yazdi.pandemic.mapcontext.service.IMapService;
+import com.yazdi.pandemic.sharedkernel.events.ApplicationEvent;
 import com.yazdi.pandemic.sharedkernel.events.EventBus;
 
 public class MapServiceApiTest {
@@ -30,30 +31,34 @@ public class MapServiceApiTest {
         container.put(IMapService.class, mapService);
         return container;
     }
-	
-	  @BeforeAll 
-	  public static void init() {
-		  Map<Class<?>, Object> container = createContainer();
-		  mapService = (IMapService) container.get(IMapService.class);
-	  }
-	  
-	  @Test 
-	  public void updatePlayerLocationInMapServiceTest() {
-		  MapServiceApi api = new MapServiceApi(mapService); 
-		  WorldMap map = new WorldMap();
-		  City prevLocation = new City("Zahedan");
-		  City newLocation = new City("Mashhad");
-		  map.addCity(prevLocation);
-		  map.addCity(newLocation);
-		  
-		  int playerId = 1;
-		  prevLocation.addPlayer(playerId);
-		  api.updatePlayerLocationInMap(playerId, newLocation, map);
-		  
-		  assertAll(
-		            () -> assertTrue(!((City) map.getCity(prevLocation.getId())).getPlayers().contains(playerId)),
-		            () -> assertTrue(((City) map.getCity(newLocation.getId())).getPlayers().contains(playerId)));
-	  }
-	 
+	@BeforeAll
+	public static void init() {
+		Map<Class<?>, Object> container = createContainer();
+		mapService = (IMapService) container.get(IMapService.class);
+	}
+	@Test 
+	public void updatePlayerLocationInMapServiceTest() {
+		MapServiceApi api = new MapServiceApi(mapService); 
+		WorldMap map = new WorldMap();
+		City prevLocation = new City("Zahedan");
+		City newLocation = new City("Mashhad");
+		map.addCity(prevLocation);
+		map.addCity(newLocation);
+		int playerId = 1;
+		prevLocation.addPlayer(playerId);
+		api.updatePlayerLocationInMap(playerId, newLocation, map);
+		assertAll(
+				() -> assertTrue(!((City) map.getCity(prevLocation.getId())).getPlayers().contains(playerId)),
+		        () -> assertTrue(((City) map.getCity(newLocation.getId())).getPlayers().contains(playerId)));
+	}
+	@Test
+	public void listenToPlayerEventServiceTest() {
+		final String EVENT_Player_Moved = "PlayerMovedEvent";
+		MapServiceApi api = new MapServiceApi(mapService); 
+		WorldMap map = new WorldMap();
+		api.listenToPlayerEventService();
+		
+		assertTrue(mapService.getEventBus().getSubscribers().containsKey(EVENT_Player_Moved));
+	}
 
 }
