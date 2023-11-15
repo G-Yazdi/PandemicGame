@@ -44,7 +44,7 @@ public class MapService implements IMapService {
 		this.eventBus.subscribe(EVENT_Player_Moved, new EventSubscriber() {
 			@Override
             public <E extends ApplicationEvent> void onEvent(E event) {
-            	Optional<City> newLocation = findPlayerCity(Integer.parseInt(event.getPayloadValue("player_id")));
+            	Optional<City> newLocation = findCityByPlayerId(Integer.parseInt(event.getPayloadValue("player_id")));
             	updatePlayerLocationInMap(Integer.parseInt(event.getPayloadValue("player_id")), newLocation.get(), map);
             }
         });
