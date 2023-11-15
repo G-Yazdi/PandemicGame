@@ -54,8 +54,8 @@ public class MapServiceApiTest {
 	@Test
 	public void listenToPlayerEventServiceTest() {
 		final String EVENT_Player_Moved = "PlayerMovedEvent";
-		MapServiceApi api = new MapServiceApi(mapService); 
-		WorldMap map = new WorldMap();
+		mapService.setMap(new WorldMap());
+		MapServiceApi api = new MapServiceApi(mapService);
 		api.listenToPlayerEventService();
 		
 		assertTrue(mapService.getEventBus().getSubscribers().containsKey(EVENT_Player_Moved));
