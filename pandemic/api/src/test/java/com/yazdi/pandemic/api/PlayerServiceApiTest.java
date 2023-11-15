@@ -53,7 +53,7 @@ public class PlayerServiceApiTest {
 		PlayerLocation city = new PlayerLocation("Mashhad");
 		player1.setCurrentLocation(city);
 		PlayerLocation destination = new PlayerLocation("Zahedan");
-		city.addNeighbour(destination);
+		city.addNeighbour(destination.getId());
 		PlayerServiceApi api = new PlayerServiceApi(playerService);
 		api.moveService(player1, destination);
 		assertEquals(player1.getCurrentLocation().getName(), destination.getName());
