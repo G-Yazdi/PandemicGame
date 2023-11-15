@@ -77,7 +77,7 @@ public class PlayerServiceApiTest {
 		PlayerLocation city1 = new PlayerLocation("Mashhad");
 		player1.setCurrentLocation(city1);
 		PlayerLocation destination = new PlayerLocation("Zahedan");
-		city1.addNeighbour(destination);
+		city1.addNeighbour(destination.getId());
 		
 		PlayerServiceApi api = new PlayerServiceApi(playerService);
 		api.moveService(player1, destination);
