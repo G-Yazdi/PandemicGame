@@ -13,6 +13,7 @@ public class MapService implements IMapService {
 	
 	private MapRepository mapRepository;
 	private EventBus eventBus;
+	private WorldMap map;
 	
 	@Override
     public void setMapRepository(MapRepository mapRepository) {
@@ -28,7 +29,10 @@ public class MapService implements IMapService {
 		this.eventBus = eventBus;
 		
 	}
-
+	@Override
+    public void setMap(WorldMap map) {
+        this.map = map;
+    }
 	@Override
 	public void updatePlayerLocationInMap(int playerId, City newLocation, WorldMap map) {
 		City prevLocationInMap = (City) map.getCities().findIfCustom(city -> ((City) city).getPlayers().contains(Integer.valueOf(playerId)));
@@ -39,12 +43,12 @@ public class MapService implements IMapService {
 	}
 
 	@Override
-	public void listenToPlayerEventService(WorldMap map) {
+	public void listenToPlayerEventService() {
 		final String EVENT_Player_Moved = "PlayerMovedEvent";
 		this.eventBus.subscribe(EVENT_Player_Moved, new EventSubscriber() {
 			@Override
             public <E extends ApplicationEvent> void onEvent(E event) {
-            	Optional<City> newLocation = findCityByPlayerId(Integer.parseInt(event.getPayloadValue("player_id")));
+            	Optional<City> newLocation = this.mapRepository.findCityByPlayerId(Integer.parseInt(event.getPayloadValue("player_id")));
             	updatePlayerLocationInMap(Integer.parseInt(event.getPayloadValue("player_id")), newLocation.get(), map);
             }
         });

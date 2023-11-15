@@ -9,7 +9,8 @@ public interface IMapService extends ApplicationService {
 	
 	void setMapRepository(MapRepository mapRepository);
 	void updatePlayerLocationInMap(int playerId, City newLocation, WorldMap map);
-	void listenToPlayerEventService(WorldMap map);
+	void listenToPlayerEventService();
+	void setMap(WorldMap map);
 	
 
 }
