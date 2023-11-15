@@ -23,7 +23,7 @@ public class MoveAction extends Action {
 
 	@Override
 	protected void validate() {
-		if (player.getCurrentLocation().getNeighbours().findIfCustom(c->c == destination) == null) {
+		if (player.getCurrentLocation().getNeighbours().findIfCustom(c->c == destination.getId()) == null) {
 			 throw new RuntimeException("Illegal move request: The player can not move to a non-neighbor city!");
 		}
 	}

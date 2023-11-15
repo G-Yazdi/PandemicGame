@@ -1,28 +1,32 @@
 package com.yazdi.pandemic.playercontext.model.entities;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import com.yazdi.pandemic.sharedkernel.utils.CustomArrayList;
 
 public class PlayerLocation 
 {
-	private CustomArrayList<PlayerLocation> neighbours;
+	private int id;
+	private static AtomicInteger uniqueId=new AtomicInteger();
+	private CustomArrayList<Integer> neighbours;
 	private CustomArrayList<Cube> cubes;
 	private String name;
 	private boolean hasResearchStation;
 	
 	public PlayerLocation(String name) {
-		
+		this.id = uniqueId.getAndIncrement();
 		this.setName(name);
 		this.setHasResearchStation(false);
-		this.neighbours = new CustomArrayList<PlayerLocation>();
+		this.neighbours = new CustomArrayList<Integer>();
 		this.cubes = new CustomArrayList<Cube>();
 	}
 	
-	public CustomArrayList<PlayerLocation> getNeighbours() {
+	public CustomArrayList<Integer> getNeighbours() {
 		return this.neighbours;
 	}
 	
-	public void addNeighbour(PlayerLocation city) {
-		this.neighbours.add(city);
+	public void addNeighbour(int cityId) {
+		this.neighbours.add(cityId);
 	}
 
 	public String getName() {
@@ -60,6 +64,20 @@ public class PlayerLocation
 	public void setHasResearchStation(Boolean hasResearchStation) {
 		this.hasResearchStation = hasResearchStation;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	public CustomArrayList<Cube> getCubes() {
+		return this.cubes;
+	}
+
+	public void setCubes(CustomArrayList<Cube> cubes) {
+		this.cubes = cubes;
+	}
     
 }
-
