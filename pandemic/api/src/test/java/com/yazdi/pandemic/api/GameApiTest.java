@@ -1,15 +1,26 @@
 package com.yazdi.pandemic.api;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ServiceLoader;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
+import com.yazdi.pandemic.mapcontext.model.entities.City;
+import com.yazdi.pandemic.mapcontext.model.entities.WorldMap;
 import com.yazdi.pandemic.mapcontext.repository.MapRepository;
 import com.yazdi.pandemic.mapcontext.service.IMapService;
+import com.yazdi.pandemic.playercontext.repository.PlayerRepository;
 import com.yazdi.pandemic.playercontext.service.IPlayerService;
 import com.yazdi.pandemic.sharedkernel.events.EventBus;
+import com.yazdi.pandemic.sharedkernel.utils.CustomArrayList;
+import com.yazdi.pandemic.playercontext.model.entities.GlobetrotterRole;
+import com.yazdi.pandemic.playercontext.model.entities.Player;
+import com.yazdi.pandemic.playercontext.model.entities.PlayerLocation;
+import com.yazdi.pandemic.playercontext.model.contracts.Role;
 
 public class GameApiTest {
 	private static IPlayerService playerService;
@@ -22,8 +33,14 @@ public class GameApiTest {
         mapService.setEventBus(eventBus);
         mapService.setMapRepository(mapRepository);
         
+        PlayerRepository playerRepository = ServiceLoader.load(PlayerRepository.class).findFirst().get();
+        IPlayerService playerService = ServiceLoader.load(IPlayerService.class).findFirst().get();
+        playerService.setEventBus(eventBus);
+        playerService.setPlayerRepository(playerRepository);
+        
         HashMap<Class<?>, Object> container = new HashMap<>();
         container.put(IMapService.class, mapService);
+        container.put(IPlayerService.class, playerService);
         return container;
     }
 	
@@ -31,6 +48,34 @@ public class GameApiTest {
 	  public static void init() {
 		  Map<Class<?>, Object> container = createContainer();
 		  mapService = (IMapService) container.get(IMapService.class);
+		  playerService = (IPlayerService) container.get(IPlayerService.class);
 	  }
-
+	  @Test 
+	  public void movePlayerInGameServiceTest() {
+		  /*Player Context*/
+		  Role role = new GlobetrotterRole();
+		  Player player = new Player(role);
+		  PlayerLocation currentLocation = new PlayerLocation("Mashhad");
+		  player.setCurrentLocation(currentLocation);
+		  PlayerLocation destination = new PlayerLocation("Zahedan");
+		  currentLocation.addNeighbour(destination.getId());
+		  PlayerServiceApi playerServiceApi = new PlayerServiceApi(playerService);
+		  
+		  /*Map Context*/
+		  WorldMap map = new WorldMap();
+		  City prevLocation = new City(currentLocation.getId(), currentLocation.getName(), new CustomArrayList<Integer>().add(destination.getId()), null, new CustomArrayList<Integer>().add(player.getId()), false);
+		  City newLocation = new City(destination.getId(), destination.getName(), new CustomArrayList<Integer>().add(currentLocation.getId()), null, null, false);
+		  map.addCity(prevLocation);
+		  map.addCity(newLocation);
+		  mapService.setMap(map);
+		  MapServiceApi mapServiceApi = new MapServiceApi(mapService);
+		  
+		  mapServiceApi.listenToPlayerEventService();
+		  playerServiceApi.moveService(player, destination);
+		  
+		  
+		  assertAll(
+		            () -> assertTrue(!((City) map.getCity(prevLocation.getId())).getPlayers().contains(playerId)),
+		            () -> assertTrue(((City) map.getCity(newLocation.getId())).getPlayers().contains(playerId)));
+	  }
 }
