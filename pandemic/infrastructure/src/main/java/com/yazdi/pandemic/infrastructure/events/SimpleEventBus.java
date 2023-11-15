@@ -36,5 +36,10 @@ public class SimpleEventBus implements EventBus {
             subscribers.get(eventType).remove(subscriber);
         }
     }
+
+	@Override
+	public Map<String, Set<EventSubscriber>> getSubscribers() {
+		return this.subscribers;
+	}
 }
 
