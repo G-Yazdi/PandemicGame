@@ -1,6 +1,7 @@
 package com.yazdi.pandemic.api;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -63,8 +64,14 @@ public class GameApiTest {
 		  
 		  /*Map Context*/
 		  WorldMap map = new WorldMap();
-		  City prevLocation = new City(currentLocation.getId(), currentLocation.getName(), new CustomArrayList<Integer>().add(destination.getId()), null, new CustomArrayList<Integer>().add(player.getId()), false);
-		  City newLocation = new City(destination.getId(), destination.getName(), new CustomArrayList<Integer>().add(currentLocation.getId()), null, null, false);
+		  CustomArrayList<Integer> prevLocationPlayers = new CustomArrayList<Integer>();
+		  prevLocationPlayers.add(player.getId());
+		  CustomArrayList<Integer> prevLocationNeighbors = new CustomArrayList<Integer>();
+		  prevLocationNeighbors.add(destination.getId());
+		  CustomArrayList<Integer> newLocationNeighbors = new CustomArrayList<Integer>();
+		  newLocationNeighbors.add(currentLocation.getId());
+		  City prevLocation = new City(currentLocation.getId(), currentLocation.getName(), prevLocationNeighbors, null, prevLocationPlayers, false);
+		  City newLocation = new City(destination.getId(), destination.getName(), newLocationNeighbors, null, null, false);
 		  map.addCity(prevLocation);
 		  map.addCity(newLocation);
 		  mapService.setMap(map);
@@ -73,9 +80,10 @@ public class GameApiTest {
 		  mapServiceApi.listenToPlayerEventService();
 		  playerServiceApi.moveService(player, destination);
 		  
-		  
+		  /*
+		   Sees if changing a player's location causes updating the world map*/
 		  assertAll(
-		            () -> assertTrue(!((City) map.getCity(prevLocation.getId())).getPlayers().contains(playerId)),
-		            () -> assertTrue(((City) map.getCity(newLocation.getId())).getPlayers().contains(playerId)));
+		            () -> assertTrue(!((City) map.getCity(prevLocation.getId())).getPlayers().contains(player.getId())),
+		            () -> assertTrue(((City) map.getCity(newLocation.getId())).getPlayers().contains(player.getId())));
 	  }
 }
