@@ -31,7 +31,7 @@ public class ScientistFindCureAction extends Action{
 	@Override
 	public void perform() {
 		validate();
-		player.getCurrentLocation().getCubes(disease).forEach(c->c.getDisease().setHasCure(true));
+		player.getCurrentLocation().getCubes(disease).forEach(c->((Cube) c).getDisease().setHasCure(true));
 		player.getHand().removeNElementsIfCustom(c-> ((PlayerCard) c).getDiseaseName() == disease.getName(), 4);			
 	}
 }

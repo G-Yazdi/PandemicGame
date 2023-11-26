@@ -1,6 +1,8 @@
 package com.yazdi.pandemic.playercontext.model.entities;
 
-public class Cube {
+import com.yazdi.pandemic.sharedkernel.contracts.ICube;
+
+public class Cube implements ICube {
 	private Disease disease;
 	
 	public Cube(Disease disease) {

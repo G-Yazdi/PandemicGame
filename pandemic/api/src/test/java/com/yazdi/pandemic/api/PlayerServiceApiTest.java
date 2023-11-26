@@ -24,6 +24,7 @@ import com.yazdi.pandemic.playercontext.model.entities.PlayerCard;
 import com.yazdi.pandemic.playercontext.model.entities.ScientistRole;
 import com.yazdi.pandemic.playercontext.repository.PlayerRepository;
 import com.yazdi.pandemic.playercontext.service.IPlayerService;
+import com.yazdi.pandemic.sharedkernel.contracts.ICube;
 import com.yazdi.pandemic.sharedkernel.events.EventBus;
 
 public class PlayerServiceApiTest {
@@ -186,7 +187,7 @@ public class PlayerServiceApiTest {
 		assertAll(
 		            () -> {
 						player1.getCurrentLocation().getCubes(disease)
-						.forEach(cube->assertTrue(cube.getDisease().getHasCure()));
+						.forEach(cube->assertTrue(((Cube) cube).getDisease().getHasCure()));
 					},
 		            () -> assertEquals(previousSize - 4, currentSize) //check if 4 cards are removed from the player's hand
 		    );
@@ -250,7 +251,7 @@ public class PlayerServiceApiTest {
 		assertAll(
 				() -> {
 					player1.getCurrentLocation().getCubes(disease)
-					.forEach(cube->assertTrue(cube.getDisease().getHasCure()));
+					.forEach(cube->assertTrue(((Cube) cube).getDisease().getHasCure()));
 				},
 		        () -> assertEquals(previousSize - 5, currentSize) //check if 5 cards are removed from the player's hand
 		    );
@@ -268,7 +269,7 @@ public class PlayerServiceApiTest {
 		PlayerServiceApi api = new PlayerServiceApi(playerService);
 		api.treatDiseaseService(player1, disease); 
 		
-		List<Cube> cubesOfDisease = city1.getCubes(disease);// In this case, all the cubes of the disease should be removed from the city1
+		List<ICube> cubesOfDisease = city1.getCubes(disease);// In this case, all the cubes of the disease should be removed from the city1
 		int currentSize = cubesOfDisease.size();
 		
 		assertEquals(0, currentSize);	
@@ -283,7 +284,7 @@ public class PlayerServiceApiTest {
 		city1.addCube(new Cube(disease));
 		city1.addCube(new Cube(disease));
 		
-		List<Cube> cubesOfDisease = city1.getCubes(disease);
+		List<ICube> cubesOfDisease = city1.getCubes(disease);
 		int previousSize = cubesOfDisease.size();
 		
 		PlayerServiceApi api = new PlayerServiceApi(playerService);
@@ -309,7 +310,7 @@ public class PlayerServiceApiTest {
 		PlayerServiceApi api = new PlayerServiceApi(playerService);
 		api.treatDiseaseService(player1, disease);
 		
-		List<Cube> cubesOfDisease = city1.getCubes(disease);// In this case, all the cubes of the disease should be removed from the city1
+		List<ICube> cubesOfDisease = city1.getCubes(disease);// In this case, all the cubes of the disease should be removed from the city1
 		int currentSize = cubesOfDisease.size();
 		
 		assertEquals(0, currentSize);	

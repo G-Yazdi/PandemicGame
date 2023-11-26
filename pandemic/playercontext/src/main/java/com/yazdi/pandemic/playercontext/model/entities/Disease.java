@@ -1,6 +1,8 @@
 package com.yazdi.pandemic.playercontext.model.entities;
 
-public class Disease {
+import com.yazdi.pandemic.sharedkernel.contracts.IDisease;
+
+public class Disease implements IDisease {
 	
 	private String name;
 	private boolean hasCure;
