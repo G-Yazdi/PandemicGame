@@ -5,7 +5,4 @@ module com.yazdi.pandemic.api {
     uses com.yazdi.pandemic.mapcontext.service.IMapService;
     uses com.yazdi.pandemic.mapcontext.repository.MapRepository;
     requires transitive com.yazdi.pandemic.infrastructure;
-	requires transitive com.yazdi.pandemic.playercontext;
-	requires transitive com.yazdi.pandemic.sharedkernel;
-	requires transitive com.yazdi.pandemic.mapcontext;
 }
